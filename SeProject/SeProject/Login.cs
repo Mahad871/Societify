@@ -29,8 +29,8 @@ namespace SeProject
         {
             string userid = userid1.Text; // Assuming the TextBox for userID is named useridTextBox
             string password = password1.Text; // Assuming the TextBox for password is named passwordTextBox
-            string selectedRole=comboBox1.Text.ToString();
-
+            string selectedRole = comboBox1.Text.ToString();
+            string membername;
             // Replace with your actual connection string
             //string connectionString = @"Server=YOUR_SERVER_NAME;Database=seproject;Integrated Security=True;";
 
@@ -46,22 +46,50 @@ namespace SeProject
                         // Extend SQL to check if the user is an admin
                         sql += " AND UserID IN (SELECT UserID FROM Admins)";
                     }
+                    else if (selectedRole == "President")
+                    {
+                        sql += " AND Role = @Role";
+                    }
 
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
                         command.Parameters.AddWithValue("@UserID", userid);
                         command.Parameters.AddWithValue("@Password", password); // Consider using hashed passwords
-
+                        if (selectedRole == "President")
+                        {
+                            command.Parameters.AddWithValue("@Role", selectedRole);
+                        }
                         int count = Convert.ToInt32(command.ExecuteScalar());
 
                         if (count == 1)
                         {
+                            string sql1 = "SELECT MemberName FROM Users WHERE UserID=@UserID AND Password=@Password";
                             // Login successful
-                            MessageBox.Show($"Login Successful as {selectedRole}");
-                            // Navigate to another form if login is successful
-                            // MainForm mainForm = new MainForm();
-                            // mainForm.Show();
-                            // this.Hide();
+                            
+                            using (SqlCommand command1 = new SqlCommand(sql1, connection))
+
+                            {
+                                command1.Parameters.AddWithValue("@UserID", userid);
+                                command1.Parameters.AddWithValue("@Password", password);
+                                var result = command1.ExecuteScalar();
+                                membername = result?.ToString();
+                            }
+                                //MessageBox.Show($"Login Successful as {selectedRole}");
+                                if (selectedRole == "Admin")
+                            {
+                                AdminLogin adminLogin = new AdminLogin(membername);
+                                adminLogin.Show();
+                                this.Hide();
+                            }
+                            else if (selectedRole == "President")
+                            {
+                                // Assuming PresidentLogin is the form you want to show for presidents
+                                PresidentLogin presidentLogin = new PresidentLogin(membername);
+                                presidentLogin.Show();
+                                this.Hide();
+                            }
+
+
                         }
                         else
                         {
@@ -84,6 +112,11 @@ namespace SeProject
         }
 
         private void password_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Login_Load(object sender, EventArgs e)
         {
 
         }

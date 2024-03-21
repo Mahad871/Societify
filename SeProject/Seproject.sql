@@ -73,3 +73,7 @@ select *from Admins
 
 INSERT INTO Users (Email, MemberName, RollNo, Password)
 VALUES ('user@example.com', 'John Doe', '12345', 'userPassword123');
+
+ALTER TABLE Users
+ADD Role VARCHAR(50) NULL,
+CONSTRAINT CHK_Users_Role CHECK (Role IN ('President', 'Member') OR Role IS NULL);
