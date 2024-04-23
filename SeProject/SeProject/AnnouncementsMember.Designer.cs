@@ -43,20 +43,22 @@
             // 
             // SocietyCombobox
             // 
+            SocietyCombobox.DropDownStyle = ComboBoxStyle.DropDownList;
             SocietyCombobox.FormattingEnabled = true;
-            SocietyCombobox.Location = new Point(473, 18);
+            SocietyCombobox.Location = new Point(414, 14);
+            SocietyCombobox.Margin = new Padding(3, 2, 3, 2);
             SocietyCombobox.Name = "SocietyCombobox";
-            SocietyCombobox.Size = new Size(356, 28);
+            SocietyCombobox.Size = new Size(312, 23);
             SocietyCombobox.TabIndex = 4;
-            SocietyCombobox.Text = "Select Society";
             SocietyCombobox.SelectedIndexChanged += SocietyCombobox_SelectedIndexChanged;
             // 
             // back
             // 
             back.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            back.Location = new Point(36, 31);
+            back.Location = new Point(32, 23);
+            back.Margin = new Padding(3, 2, 3, 2);
             back.Name = "back";
-            back.Size = new Size(165, 40);
+            back.Size = new Size(144, 30);
             back.TabIndex = 5;
             back.Text = "Back";
             back.UseVisualStyleBackColor = true;
@@ -67,29 +69,31 @@
             panel2.BackColor = Color.PaleGreen;
             panel2.Controls.Add(SocietyCombobox);
             panel2.Controls.Add(announcemntsgrid);
-            panel2.Location = new Point(36, 83);
+            panel2.Location = new Point(32, 62);
+            panel2.Margin = new Padding(3, 2, 3, 2);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1251, 549);
+            panel2.Size = new Size(1095, 412);
             panel2.TabIndex = 6;
             // 
             // announcemntsgrid
             // 
             announcemntsgrid.BackgroundColor = Color.Honeydew;
             announcemntsgrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            announcemntsgrid.Location = new Point(20, 52);
+            announcemntsgrid.Location = new Point(18, 39);
+            announcemntsgrid.Margin = new Padding(3, 2, 3, 2);
             announcemntsgrid.Name = "announcemntsgrid";
             announcemntsgrid.RowHeadersWidth = 51;
             announcemntsgrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            announcemntsgrid.Size = new Size(1218, 490);
+            announcemntsgrid.Size = new Size(1066, 368);
             announcemntsgrid.TabIndex = 0;
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.Location = new Point(602, 34);
+            label2.Location = new Point(527, 26);
             label2.Name = "label2";
-            label2.Size = new Size(224, 37);
+            label2.Size = new Size(174, 30);
             label2.TabIndex = 7;
             label2.Text = "Announcements";
             // 
@@ -99,12 +103,13 @@
             // 
             // AnnouncementsMember
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1322, 637);
+            ClientSize = new Size(1157, 478);
             Controls.Add(back);
             Controls.Add(panel2);
             Controls.Add(label2);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "AnnouncementsMember";
             Text = "AnnouncementsMember";
             Load += AnnouncementsMember_Load;

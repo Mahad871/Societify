@@ -88,6 +88,7 @@
             // 
             // SocietyCombobox
             // 
+            SocietyCombobox.DropDownStyle = ComboBoxStyle.DropDownList;
             SocietyCombobox.FormattingEnabled = true;
             SocietyCombobox.Items.AddRange(new object[] { "Select Society" });
             SocietyCombobox.Location = new Point(24, 129);
@@ -95,7 +96,6 @@
             SocietyCombobox.Name = "SocietyCombobox";
             SocietyCombobox.Size = new Size(312, 23);
             SocietyCombobox.TabIndex = 9;
-            SocietyCombobox.Text = "Select Society";
             SocietyCombobox.SelectedIndexChanged += SocietyComboBox_SelectedIndexChanged;
             // 
             // Add_Update_Button

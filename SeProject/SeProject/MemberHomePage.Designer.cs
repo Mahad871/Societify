@@ -29,12 +29,13 @@
         private void InitializeComponent()
         {
             pictureBox1 = new PictureBox();
-            TicketsButton = new Button();
+            buyTicketsButton = new Button();
             EventsButton = new Button();
             AnnouncementsButton = new Button();
             pname = new Label();
             label1 = new Label();
             linkLabel1 = new LinkLabel();
+            VerifyTicketsButton = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -50,21 +51,22 @@
             pictureBox1.TabStop = false;
             pictureBox1.Click += pictureBox1_Click;
             // 
-            // TicketsButton
+            // buyTicketsButton
             // 
-            TicketsButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            TicketsButton.Location = new Point(785, 442);
-            TicketsButton.Margin = new Padding(3, 4, 3, 4);
-            TicketsButton.Name = "TicketsButton";
-            TicketsButton.Size = new Size(210, 57);
-            TicketsButton.TabIndex = 11;
-            TicketsButton.Text = "Tickets";
-            TicketsButton.UseVisualStyleBackColor = true;
+            buyTicketsButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            buyTicketsButton.Location = new Point(785, 381);
+            buyTicketsButton.Margin = new Padding(3, 4, 3, 4);
+            buyTicketsButton.Name = "buyTicketsButton";
+            buyTicketsButton.Size = new Size(210, 57);
+            buyTicketsButton.TabIndex = 11;
+            buyTicketsButton.Text = "Buy Tickets";
+            buyTicketsButton.UseVisualStyleBackColor = true;
+            buyTicketsButton.Click += buyTicketsButton_Click;
             // 
             // EventsButton
             // 
             EventsButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            EventsButton.Location = new Point(785, 333);
+            EventsButton.Location = new Point(785, 288);
             EventsButton.Name = "EventsButton";
             EventsButton.Size = new Size(210, 57);
             EventsButton.TabIndex = 10;
@@ -75,7 +77,7 @@
             // AnnouncementsButton
             // 
             AnnouncementsButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            AnnouncementsButton.Location = new Point(785, 231);
+            AnnouncementsButton.Location = new Point(785, 200);
             AnnouncementsButton.Name = "AnnouncementsButton";
             AnnouncementsButton.Size = new Size(210, 57);
             AnnouncementsButton.TabIndex = 9;
@@ -118,13 +120,26 @@
             linkLabel1.Text = "Log Out";
             linkLabel1.LinkClicked += linkLabel1_LinkClicked;
             // 
+            // VerifyTicketsButton
+            // 
+            VerifyTicketsButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            VerifyTicketsButton.Location = new Point(785, 464);
+            VerifyTicketsButton.Margin = new Padding(3, 4, 3, 4);
+            VerifyTicketsButton.Name = "VerifyTicketsButton";
+            VerifyTicketsButton.Size = new Size(210, 57);
+            VerifyTicketsButton.TabIndex = 13;
+            VerifyTicketsButton.Text = "VerifyTickets";
+            VerifyTicketsButton.UseVisualStyleBackColor = true;
+            VerifyTicketsButton.Click += VerifyTicketsButton_Click;
+            // 
             // MemberHomePage
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1287, 633);
+            Controls.Add(VerifyTicketsButton);
             Controls.Add(linkLabel1);
-            Controls.Add(TicketsButton);
+            Controls.Add(buyTicketsButton);
             Controls.Add(EventsButton);
             Controls.Add(AnnouncementsButton);
             Controls.Add(pname);
@@ -141,11 +156,12 @@
         #endregion
 
         private PictureBox pictureBox1;
-        private Button TicketsButton;
+        private Button buyTicketsButton;
         private Button EventsButton;
         private Button AnnouncementsButton;
         private Label pname;
         private Label label1;
         private LinkLabel linkLabel1;
+        private Button VerifyTicketsButton;
     }
 }

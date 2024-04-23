@@ -65,7 +65,7 @@
             panel2.Controls.Add(EventsGrid);
             panel2.Location = new Point(504, 100);
             panel2.Name = "panel2";
-            panel2.Size = new Size(794, 558);
+            panel2.Size = new Size(794, 557);
             panel2.TabIndex = 6;
             // 
             // editbutton
@@ -129,7 +129,7 @@
             panel1.Controls.Add(label1);
             panel1.Location = new Point(47, 100);
             panel1.Name = "panel1";
-            panel1.Size = new Size(414, 558);
+            panel1.Size = new Size(414, 557);
             panel1.TabIndex = 4;
             // 
             // dateTimePicker1
@@ -149,12 +149,12 @@
             // 
             // SocietyCombobox
             // 
+            SocietyCombobox.DropDownStyle = ComboBoxStyle.DropDownList;
             SocietyCombobox.FormattingEnabled = true;
             SocietyCombobox.Location = new Point(27, 172);
             SocietyCombobox.Name = "SocietyCombobox";
             SocietyCombobox.Size = new Size(356, 28);
             SocietyCombobox.TabIndex = 4;
-            SocietyCombobox.Text = "Select Society";
             SocietyCombobox.SelectedIndexChanged += SocietyCombobox_SelectedIndexChanged;
             // 
             // save
@@ -162,7 +162,7 @@
             save.BackColor = SystemColors.GradientActiveCaption;
             save.FlatStyle = FlatStyle.Flat;
             save.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            save.Location = new Point(92, 493);
+            save.Location = new Point(91, 493);
             save.Name = "save";
             save.Size = new Size(169, 45);
             save.TabIndex = 3;
@@ -204,7 +204,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1344, 670);
+            ClientSize = new Size(1344, 669);
             Controls.Add(label2);
             Controls.Add(panel2);
             Controls.Add(back);

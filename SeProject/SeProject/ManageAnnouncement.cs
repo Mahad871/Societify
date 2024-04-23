@@ -42,14 +42,12 @@ namespace SeProject
 
         private void ManageAnnouncement_Load(object sender, EventArgs e)
         {
-            // Adjust the query to select societies where the current president is presiding
             string query = "SELECT SocietyID, Name FROM Societies WHERE PresidentUserID = @PresidentUserID";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    // Add the presidentID parameter to the command
                     command.Parameters.AddWithValue("@PresidentUserID", presidentID);
 
                     connection.Open();
@@ -78,10 +76,10 @@ namespace SeProject
         private void LoadAnnouncements()
         {
             string query = @"
-        SELECT AnnouncementID, SocietyID, Title, Content, DatePosted
-        FROM Announcements
-        WHERE PostedByUserID = @PostedByUserID
-        ORDER BY DatePosted DESC";// Gets the latest announcements at the top
+            SELECT AnnouncementID, SocietyID, Title, Content, DatePosted
+            FROM Announcements
+            WHERE PostedByUserID = @PostedByUserID
+            ORDER BY DatePosted DESC";
 
             DataTable announcementsTable = new DataTable();
 
@@ -91,7 +89,6 @@ namespace SeProject
                 {
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
-                        // Use the presidentID to filter the announcements
                         command.Parameters.AddWithValue("@PostedByUserID", Convert.ToInt32(presidentID));
 
                         using (SqlDataAdapter adapter = new SqlDataAdapter(command))
@@ -102,7 +99,6 @@ namespace SeProject
                     }
                 }
 
-                // Assuming 'announcementsGrid' is the name of your DataGridView
                 announcemntsgrid.DataSource = announcementsTable;
                 CustomizeGridView(announcemntsgrid);
 
@@ -121,9 +117,8 @@ namespace SeProject
 
         private void add_Click(object sender, EventArgs e)
         {
-
-            string announcementContent = announcements.Text; // Assuming 'announcements' is a TextBox for announcement content
-            string title = titles.Text; // Assuming 'titles' is a TextBox for the title
+            string announcementContent = announcements.Text;
+            string title = titles.Text;
             if (SocietyCombobox.SelectedItem != null)
             {
                 var selectedSociety = (SocietyItem)SocietyCombobox.SelectedItem;
@@ -143,14 +138,13 @@ namespace SeProject
 
             if (isEditing)
             {
-                // Logic to update the existing announcement
                 string updateQuery = @"
-        UPDATE Announcements 
-        SET Title = @Title, 
-            Content = @Content, 
-            SocietyID = @SocietyID,
-            DatePosted = GETDATE()  -- Use GETDATE() to set the current date and time
-        WHERE AnnouncementID = @AnnouncementID";
+            UPDATE Announcements 
+            SET Title = @Title, 
+                Content = @Content, 
+                SocietyID = @SocietyID,
+                DatePosted = GETDATE()
+            WHERE AnnouncementID = @AnnouncementID";
 
                 try
                 {
@@ -158,7 +152,6 @@ namespace SeProject
                     {
                         using (SqlCommand command = new SqlCommand(updateQuery, connection))
                         {
-                            // Add parameters for update
                             command.Parameters.AddWithValue("@Title", title);
                             command.Parameters.AddWithValue("@Content", announcementContent);
                             command.Parameters.AddWithValue("@SocietyID", selectedSocietyID);
@@ -169,9 +162,8 @@ namespace SeProject
                         }
                     }
 
-                    // Reset the form
                     ResetForm();
-                    LoadAnnouncements(); // Refresh the grid
+                    LoadAnnouncements();
                 }
                 catch (Exception ex)
                 {
@@ -181,8 +173,8 @@ namespace SeProject
             else
             {
                 string query = @"
-        INSERT INTO Announcements (SocietyID, PostedByUserID, Title, Content) 
-        VALUES (@SocietyID, @PostedByUserID, @Title, @Content)";
+            INSERT INTO Announcements (SocietyID, PostedByUserID, Title, Content) 
+            VALUES (@SocietyID, @PostedByUserID, @Title, @Content)";
 
                 try
                 {
@@ -191,13 +183,13 @@ namespace SeProject
                         using (SqlCommand command = new SqlCommand(query, connection))
                         {
                             command.Parameters.AddWithValue("@SocietyID", selectedSocietyID);
-                            command.Parameters.AddWithValue("@PostedByUserID", Convert.ToInt32(presidentID)); // Assuming presidentID is the PostedByUserID
+                            command.Parameters.AddWithValue("@PostedByUserID", Convert.ToInt32(presidentID));
                             command.Parameters.AddWithValue("@Title", title);
                             command.Parameters.AddWithValue("@Content", announcementContent);
 
                             connection.Open();
                             command.ExecuteNonQuery();
-                            /* MessageBox.Show("Announcement added successfully!");*/
+                            ResetForm();
                             LoadAnnouncements();
                         }
                     }
@@ -211,22 +203,18 @@ namespace SeProject
 
         private void ResetForm()
         {
-            // Reset the form fields
             titles.Clear();
             announcements.Clear();
             SocietyCombobox.SelectedIndex = -1;
 
-            // Reset flags
             isEditing = false;
             editingAnnouncementID = -1;
 
-            // Change the button text back to "Add Announcement"
             add.Text = "Add Announcement";
         }
 
         private void CustomizeGridView(DataGridView gridView)
         {
-            // Basic visual customization
             gridView.ColumnHeadersDefaultCellStyle.BackColor = Color.Navy;
             gridView.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
             gridView.ColumnHeadersDefaultCellStyle.Font = new Font(gridView.Font, FontStyle.Bold);
@@ -234,33 +222,23 @@ namespace SeProject
             gridView.DefaultCellStyle.SelectionBackColor = Color.DarkBlue;
             gridView.DefaultCellStyle.SelectionForeColor = Color.White;
 
-            // Alternating rows style
             gridView.AlternatingRowsDefaultCellStyle.BackColor = Color.LightBlue;
 
-            // Grid lines
             gridView.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             gridView.GridColor = Color.LightGray;
 
-            // Adjust row heights
             gridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             gridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 
-            // Hide scroll bars if not needed
             gridView.ScrollBars = ScrollBars.Both;
 
-            // Improve the appearance of the selection
             gridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             gridView.MultiSelect = false;
 
-            // Read-only mode to prevent direct editing in the grid view
             gridView.ReadOnly = true;
 
-            // Set the AutoSizeColumnsMode to Fill to ensure that columns fill the grid width
             gridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
-
-
-
 
         private void SocietyCombobox_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -279,17 +257,13 @@ namespace SeProject
 
         private void deletebutton_Click(object sender, EventArgs e)
         {
-            // Check if any row is selected
             if (announcemntsgrid.SelectedRows.Count > 0)
             {
-                // Assuming your DataGridView's SelectionMode is set to FullRowSelect
                 int selectedRowIndex = announcemntsgrid.SelectedRows[0].Index;
                 if (selectedRowIndex != -1)
                 {
-                    // Get the AnnouncementID of the selected row
                     int announcementID = Convert.ToInt32(announcemntsgrid.Rows[selectedRowIndex].Cells["AnnouncementID"].Value);
 
-                    // Prepare SQL DELETE query
                     string query = "DELETE FROM Announcements WHERE AnnouncementID = @AnnouncementID";
 
                     try
@@ -305,8 +279,7 @@ namespace SeProject
 
                                 if (result > 0)
                                 {
-                                    //MessageBox.Show("Announcement deleted successfully.");
-                                    LoadAnnouncements(); // Refresh the DataGridView
+                                    LoadAnnouncements();
                                 }
                                 else
                                 {
@@ -336,13 +309,11 @@ namespace SeProject
                 editingAnnouncementID = Convert.ToInt32(selectedRow.Cells["AnnouncementID"].Value);
                 string title = Convert.ToString(selectedRow.Cells["Title"].Value);
                 string content = Convert.ToString(selectedRow.Cells["Content"].Value);
-                int societyIDToSelect = Convert.ToInt32(selectedRow.Cells["SocietyID"].Value); // Assuming SocietyID column exists
+                int societyIDToSelect = Convert.ToInt32(selectedRow.Cells["SocietyID"].Value);
 
-                // Set the announcement content and title in the textboxes
                 titles.Text = title;
                 announcements.Text = content;
 
-                // Find and set the correct society in the combobox
                 foreach (var item in SocietyCombobox.Items)
                 {
                     SocietyItem societyItem = item as SocietyItem;
@@ -353,8 +324,7 @@ namespace SeProject
                     }
                 }
 
-                // Change button text to indicate that it will save changes, not add a new announcement
-                add.Text = "Save Announcement"; // Assuming the button is named addAnnouncementButton
+                add.Text = "Save Announcement";
                 isEditing = true;
             }
             else

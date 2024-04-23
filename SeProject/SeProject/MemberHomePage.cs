@@ -55,5 +55,19 @@ namespace SeProject
             page.Show();
             this.Hide();
         }
+
+        private void buyTicketsButton_Click(object sender, EventArgs e)
+        {
+            BuyTickets page = new BuyTickets(memberName, memberID);
+            page.Show();
+            this.Hide();
+        }
+
+        private void VerifyTicketsButton_Click(object sender, EventArgs e)
+        {
+            VerifyTicket page = new VerifyTicket(memberName, memberID);
+            page.Show();
+            this.Hide();
+        }
     }
 }

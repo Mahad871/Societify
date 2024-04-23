@@ -66,8 +66,15 @@ namespace SeProject
 
         private void ManageEventsButton_Click(object sender, EventArgs e)
         {
-            ManageEvents manageSociety = new ManageEvents(presidentName, presidentID);
-            manageSociety.Show();
+            ManageEvents screen = new ManageEvents(presidentName, presidentID);
+            screen.Show();
+            this.Hide();
+        }
+
+        private void genrateTickets_Click(object sender, EventArgs e)
+        {
+            ManageTicketsScreen screen = new ManageTicketsScreen(presidentName, presidentID);
+            screen.Show();
             this.Hide();
         }
     }

@@ -57,9 +57,11 @@ CREATE TABLE Tickets (
     EventID INT,
     UserID INT,
     IssueDate DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    IsValid BIT NOT NULL DEFAULT 1,
+	TicketStatus VARCHAR(MAX) NOT NULL,
     CONSTRAINT FK_Tickets_EventID FOREIGN KEY (EventID) REFERENCES Events(EventID),
-    CONSTRAINT FK_Tickets_UserID FOREIGN KEY (UserID) REFERENCES Users(UserID)
+    CONSTRAINT FK_Tickets_UserID FOREIGN KEY (UserID) REFERENCES Users(UserID),
+	CONSTRAINT CK_TicketStatus CHECK (TicketStatus IN ('New', 'Paid', 'Used'))
+
 );
 
 CREATE TABLE Admins (
@@ -68,6 +70,9 @@ CREATE TABLE Admins (
     CONSTRAINT FK_Admins_UserID FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );
 
+SELECT EventID, Name
+                FROM Events
+                ORDER BY EventDate DESC
 select *from Users
 select *from Admins
 select *from Announcements
@@ -85,6 +90,7 @@ ADD Bio VARCHAR(MAX);
 select *from Societies
 select * from Announcements
 select *from Memberships
+select *from Tickets
 
 delete from Memberships
 delete from Societies

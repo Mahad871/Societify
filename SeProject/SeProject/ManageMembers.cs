@@ -19,7 +19,6 @@ namespace SeProject
         string presidentID;
         List<SocietyModel> societylist = [];
 
-
         int selectedSocietyID = -1;
         public ManageMembers(string presidentName, string presidentID)
         {
@@ -37,7 +36,7 @@ namespace SeProject
 
             public override string ToString()
             {
-                return Name; 
+                return Name;
             }
         }
 
@@ -49,7 +48,6 @@ namespace SeProject
             {
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    // Add the presidentID parameter to the command
                     command.Parameters.AddWithValue("@PresidentUserID", presidentID);
 
                     connection.Open();
@@ -81,7 +79,7 @@ namespace SeProject
 
         private void SocietyComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-           
+
         }
 
         private void Role_TextChanged(object sender, EventArgs e)
@@ -140,7 +138,7 @@ namespace SeProject
         }
         private int GetUserIdByRollNo(string rollNo)
         {
-            int userId = -1; 
+            int userId = -1;
 
             string query = "SELECT UserID FROM Users WHERE RollNo = @RollNo";
 
@@ -206,7 +204,6 @@ namespace SeProject
                 dataGridView1.Columns.Add("SocietyName", "Society Name");
                 dataGridView1.Columns.Add("SocietyID", "Society ID");
 
-
                 dataGridView1.Rows.Clear();
 
                 while (reader.Read())
@@ -221,7 +218,7 @@ namespace SeProject
                         {
                             string userName = getUserName(userID);
 
-                            dataGridView1.Rows.Add(userID, userName, role, item.Name,item.SocietyID);
+                            dataGridView1.Rows.Add(userID, userName, role, item.Name, item.SocietyID);
 
                         }
                     }
@@ -243,7 +240,6 @@ namespace SeProject
                 connection.Open();
 
                 SqlDataReader reader = command.ExecuteReader();
-
 
                 while (reader.Read())
                 {
@@ -288,7 +284,6 @@ namespace SeProject
             {
                 connection.Open();
 
-                // First, check the role of the user
                 using (SqlCommand checkRoleCommand = new SqlCommand(checkRoleQuery, connection))
                 {
                     checkRoleCommand.Parameters.AddWithValue("@UserID", EnterUid.Text);
@@ -298,11 +293,10 @@ namespace SeProject
                     if (roleObj != null && roleObj.ToString() == "President")
                     {
                         MessageBox.Show("Cannot delete a President of the society.");
-                        return; // Exit the method without deleting
+                        return;
                     }
                 }
 
-                // If the role is not President, proceed with the deletion
                 using (SqlCommand deleteCommand = new SqlCommand(deleteQuery, connection))
                 {
                     deleteCommand.Parameters.AddWithValue("@UserID", EnterUid.Text);
@@ -317,7 +311,7 @@ namespace SeProject
                     else
                     {
                         MessageBox.Show("Member deleted successfully!");
-                        DisplayMembers(); // Ensure this method updates your display to show the member has been deleted
+                        DisplayMembers();
                     }
                 }
 

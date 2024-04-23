@@ -36,6 +36,7 @@
             ManageMember = new Button();
             manageAnnouncement = new Button();
             ManageEventsButton = new Button();
+            genrateTickets = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -54,7 +55,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(750, 57);
+            label1.Location = new Point(608, 30);
             label1.Name = "label1";
             label1.Size = new Size(265, 37);
             label1.TabIndex = 1;
@@ -65,7 +66,7 @@
             // 
             pname.AutoSize = true;
             pname.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            pname.Location = new Point(826, 127);
+            pname.Location = new Point(919, 33);
             pname.Name = "pname";
             pname.Size = new Size(83, 32);
             pname.TabIndex = 2;
@@ -88,7 +89,7 @@
             // ManageSocietiesButton
             // 
             ManageSocietiesButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            ManageSocietiesButton.Location = new Point(750, 201);
+            ManageSocietiesButton.Location = new Point(750, 129);
             ManageSocietiesButton.Name = "ManageSocietiesButton";
             ManageSocietiesButton.Size = new Size(210, 57);
             ManageSocietiesButton.TabIndex = 4;
@@ -99,7 +100,7 @@
             // ManageMember
             // 
             ManageMember.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            ManageMember.Location = new Point(750, 303);
+            ManageMember.Location = new Point(750, 230);
             ManageMember.Name = "ManageMember";
             ManageMember.Size = new Size(210, 57);
             ManageMember.TabIndex = 5;
@@ -110,7 +111,7 @@
             // manageAnnouncement
             // 
             manageAnnouncement.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            manageAnnouncement.Location = new Point(750, 412);
+            manageAnnouncement.Location = new Point(750, 317);
             manageAnnouncement.Margin = new Padding(3, 4, 3, 4);
             manageAnnouncement.Name = "manageAnnouncement";
             manageAnnouncement.Size = new Size(210, 57);
@@ -122,7 +123,7 @@
             // ManageEventsButton
             // 
             ManageEventsButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            ManageEventsButton.Location = new Point(750, 508);
+            ManageEventsButton.Location = new Point(750, 417);
             ManageEventsButton.Margin = new Padding(3, 4, 3, 4);
             ManageEventsButton.Name = "ManageEventsButton";
             ManageEventsButton.Size = new Size(210, 57);
@@ -131,12 +132,25 @@
             ManageEventsButton.UseVisualStyleBackColor = true;
             ManageEventsButton.Click += ManageEventsButton_Click;
             // 
+            // genrateTickets
+            // 
+            genrateTickets.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            genrateTickets.Location = new Point(750, 510);
+            genrateTickets.Margin = new Padding(3, 4, 3, 4);
+            genrateTickets.Name = "genrateTickets";
+            genrateTickets.Size = new Size(210, 57);
+            genrateTickets.TabIndex = 8;
+            genrateTickets.Text = "Manage Tickets";
+            genrateTickets.UseVisualStyleBackColor = true;
+            genrateTickets.Click += genrateTickets_Click;
+            // 
             // PresidentLogin
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Honeydew;
             ClientSize = new Size(1179, 709);
+            Controls.Add(genrateTickets);
             Controls.Add(ManageEventsButton);
             Controls.Add(manageAnnouncement);
             Controls.Add(ManageMember);
@@ -164,5 +178,6 @@
         private Button ManageMember;
         private Button manageAnnouncement;
         private Button ManageEventsButton;
+        private Button genrateTickets;
     }
 }

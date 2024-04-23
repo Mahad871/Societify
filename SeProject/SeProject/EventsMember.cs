@@ -41,16 +41,15 @@ namespace SeProject
         private void EventsMember_Load(object sender, EventArgs e)
         {
             string query = @"
-            SELECT s.SocietyID, s.Name 
-            FROM Societies s
-            INNER JOIN Memberships m ON s.SocietyID = m.SocietyID
-            WHERE m.UserID = @UserID ";
+                SELECT s.SocietyID, s.Name 
+                FROM Societies s
+                INNER JOIN Memberships m ON s.SocietyID = m.SocietyID
+                WHERE m.UserID = @UserID ";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    // Add the presidentID parameter to the command
                     command.Parameters.AddWithValue("@UserID", memberID);
 
                     connection.Open();
@@ -76,13 +75,13 @@ namespace SeProject
         }
 
 
-        private void LoadAnnouncements()
+        private void LoadEvents()
         {
             string query = @"
-            SELECT Name, Description, EventDate, Location as Venue
-            FROM Events
-            WHERE SocietyID = @SocietyID
-            ORDER BY EventDate DESC";// Gets the latest announcements at the top
+                SELECT Name, Description, EventDate, Location as Venue
+                FROM Events
+                WHERE SocietyID = @SocietyID
+                ORDER BY EventDate DESC";
 
             DataTable announcementsTable = new DataTable();
 
@@ -92,8 +91,6 @@ namespace SeProject
                 {
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
-
-
                         command.Parameters.AddWithValue("@SocietyID", selectedSociety.SocietyID);
 
                         using (SqlDataAdapter adapter = new SqlDataAdapter(command))
@@ -104,7 +101,6 @@ namespace SeProject
                     }
                 }
 
-                // Assuming 'announcementsGrid' is the name of your DataGridView
                 Eventsgrid.DataSource = announcementsTable;
                 CustomizeGridView(Eventsgrid);
 
@@ -118,7 +114,6 @@ namespace SeProject
 
         private void CustomizeGridView(DataGridView gridView)
         {
-            // Basic visual customization
             gridView.ColumnHeadersDefaultCellStyle.BackColor = Color.Navy;
             gridView.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
             gridView.ColumnHeadersDefaultCellStyle.Font = new Font(gridView.Font, FontStyle.Bold);
@@ -126,28 +121,21 @@ namespace SeProject
             gridView.DefaultCellStyle.SelectionBackColor = Color.DarkBlue;
             gridView.DefaultCellStyle.SelectionForeColor = Color.White;
 
-            // Alternating rows style
             gridView.AlternatingRowsDefaultCellStyle.BackColor = Color.LightBlue;
 
-            // Grid lines
             gridView.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
             gridView.GridColor = Color.LightGray;
 
-            // Adjust row heights
             gridView.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             gridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 
-            // Hide scroll bars if not needed
             gridView.ScrollBars = ScrollBars.Both;
 
-            // Improve the appearance of the selection
             gridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             gridView.MultiSelect = false;
 
-            // Read-only mode to prevent direct editing in the grid view
             gridView.ReadOnly = true;
 
-            // Set the AutoSizeColumnsMode to Fill to ensure that columns fill the grid width
             gridView.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
         }
 
@@ -170,7 +158,7 @@ namespace SeProject
         private void SocietyCombobox_SelectedIndexChanged(object sender, EventArgs e)
         {
             selectedSociety = (SocietyItem)SocietyCombobox.SelectedItem;
-            LoadAnnouncements();
+            LoadEvents();
         }
     }
 }
