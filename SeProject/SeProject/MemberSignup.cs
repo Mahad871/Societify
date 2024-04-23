@@ -35,9 +35,9 @@ namespace SeProject
             string rollno = rollnum1.Text;
             string email = email1.Text;
             string memberName = member1.Text;
-            string password = passwd1.Text; // Consider hashing the password
+            string password = passwd1.Text; 
             int newUserId;
-            // Validate input
+           
             if (string.IsNullOrWhiteSpace(rollno) || string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(memberName) || string.IsNullOrWhiteSpace(password))
             {
                 MessageBox.Show("Please fill in all fields.");
@@ -50,7 +50,7 @@ namespace SeProject
                 {
                     connection.Open();
 
-                    // First, insert the new admin user into the Users table
+                   
                     string sqlInsertUser = "INSERT INTO Users (Email, MemberName, Password, RollNo,Role) OUTPUT INSERTED.UserID VALUES (@Email, @MemberName, @Password, @RollNo,@Role);";
 
                     using (SqlCommand commandInsertUser = new SqlCommand(sqlInsertUser, connection))
@@ -60,18 +60,18 @@ namespace SeProject
                         commandInsertUser.Parameters.AddWithValue("@Password", password);
                         commandInsertUser.Parameters.AddWithValue("@RollNo", rollno);
                         commandInsertUser.Parameters.AddWithValue("@Role", "Member");
-                        // Execute and get the inserted user's ID
+                        
                         newUserId = (int)commandInsertUser.ExecuteScalar();
 
-                        // Now, insert a reference to this user in the Admins table
+                      
                         
                     }
                 }
 
                 MessageBox.Show($"Member signup successful! \nUserID: {newUserId}\nPassword: {password}", "Registration Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Hide(); // Hide the current form
+                this.Hide(); 
                 Form1 homePage = new Form1();
-                homePage.Show(); // Show the homepage
+                homePage.Show(); 
             }
             catch (Exception ex)
             {

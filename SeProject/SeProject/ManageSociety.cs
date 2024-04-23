@@ -44,40 +44,40 @@ namespace SeProject
 
         private void Add_Update_Button_Click(object sender, EventArgs e)
         {
-            // Get the values from the form controls
+           
             string name = SocietyName.Text;
             string bio = Bio.Text;
             string description = Descreption.Text;
             int presidentUserID = Convert.ToInt32(presidentID);
             int SocietyID;
 
-            // Create a connection to the SQL Server database
+            
             if (isUpdate)
             {
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    // Create a SQL query to update the society in the Societies table
+                    
                     string query = @"
          UPDATE Societies
          SET Name = @Name, Bio = @Bio, Description = @Description
          WHERE SocietyID = @SocietyID";
 
-                    // Create a SqlCommand object to execute the query
+                    
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
-                        // Add the parameter values to the SqlCommand object
+                        
                         command.Parameters.AddWithValue("@Name", name);
                         command.Parameters.AddWithValue("@Bio", bio);
                         command.Parameters.AddWithValue("@Description", description);
                         command.Parameters.AddWithValue("@SocietyID", updateSocietyID);
 
-                        // Open the connection to the database
+                        
                         connection.Open();
 
-                        // Execute the query
+                        
                         command.ExecuteNonQuery();
 
-                        // Close the connection
+                        
                         connection.Close();
                     }
 
@@ -88,29 +88,28 @@ namespace SeProject
             {
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    // Create a SQL query to insert the society into the Societies table
+                    
                     string query = @"
  INSERT INTO Societies (Name, Bio, Description, PresidentUserID)
     VALUES (@Name, @Bio, @Description, @PresidentUserID);
-    SELECT CAST(scope_identity() AS int);"; // This line will retrieve the newly inserted SocietyID
+    SELECT CAST(scope_identity() AS int);"; 
 
 
-                    // Create a SqlCommand object to execute the query
+                    
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
-                        // Add the parameter values to the SqlCommand object
+                        
                         command.Parameters.AddWithValue("@Name", name);
                         command.Parameters.AddWithValue("@Bio", bio);
                         command.Parameters.AddWithValue("@Description", description);
                         command.Parameters.AddWithValue("@PresidentUserID", presidentUserID);
 
-                        // Open the connection to the database
+                       
                         connection.Open();
 
-                        // Execute the query
-                        //command.ExecuteNonQuery();
+                        ;
                         SocietyID = (int)command.ExecuteScalar();
-                        // Close the connection
+                       
                         connection.Close();
                     }
                 }
@@ -131,11 +130,11 @@ namespace SeProject
                     }
                 }
 
-                // Display a success message
+                
                 MessageBox.Show("Society added successfully!");
             }
 
-            // Clear the form controls
+            
             SocietyName.Text = "";
             Bio.Text = "";
             Descreption.Text = "";
@@ -146,8 +145,7 @@ namespace SeProject
         {
             PresidentLogin presidentLogin = new PresidentLogin(presidentName, presidentID);
             presidentLogin.Show();
-            this.Close();// Navigate back to the previous page
-
+            this.Close();
         }
 
         private void listView1_SelectedIndexChanged(object sender, EventArgs e)
@@ -157,35 +155,35 @@ namespace SeProject
 
         void DisplaySocieties()
         {
-            // Create a connection to the SQL Server database
+            
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                // Create a SQL query to retrieve all the societies
+                
                 string query = "SELECT * FROM Societies";
 
-                // Create a SqlCommand object to execute the query
+                
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    // Open the connection to the database
+                    
                     connection.Open();
 
-                    // Create a SqlDataReader object to read the query results
+                   
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
-                        // Clear the list view
+                        
                         dataGridView1.Rows.Clear();
-                        dataGridView1.Columns.Clear(); // Clear existing columns
+                        dataGridView1.Columns.Clear(); 
 
-                        // Add columns to the DataGridView
+                        
                         dataGridView1.Columns.Add("SocietyID", "Society ID");
                         dataGridView1.Columns.Add("Name", "Name");
                         dataGridView1.Columns.Add("Bio", "Bio");
                         dataGridView1.Columns.Add("Description", "Description");
 
-                        // Loop through the query results
+                        
                         while (reader.Read())
                         {
-                            // Get the values from the query results
+                            
                             int societyID = (int)reader["SocietyID"];
                             string name = (string)reader["Name"];
                             string bio = (string)reader["Bio"];
@@ -205,7 +203,7 @@ namespace SeProject
                         }
                     }
 
-                    // Close the connection
+                    
                     connection.Close();
                 }
             }
@@ -223,24 +221,24 @@ namespace SeProject
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                // Create a SQL query to retrieve all the societies
+                
                 string query = "SELECT * FROM Societies";
 
-                // Create a SqlCommand object to execute the query
+                
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    // Open the connection to the database
+                    
                     connection.Open();
 
-                    // Create a SqlDataReader object to read the query results
+                    
                     using (SqlDataReader reader = command.ExecuteReader())
                     {
 
 
-                        // Loop through the query results
+                        
                         while (reader.Read())
                         {
-                            // Get the values from the query results
+                           
                             int societyID = (int)reader["SocietyID"];
                             string name = (string)reader["Name"];
                             string bio = (string)reader["Bio"];
@@ -273,7 +271,7 @@ namespace SeProject
                         }
                     }
 
-                    // Close the connection
+                   
                     connection.Close();
                 }
 
@@ -289,20 +287,20 @@ namespace SeProject
             {
                 int societyIDToDelete;
                 bool isValid = int.TryParse(delete_update.Text, out societyIDToDelete);
-                // Create a SQL query to delete the society from the Societies table
+                
                 DeleteSocityFromMemberships(societyIDToDelete);
                 string query = "DELETE FROM Societies WHERE SocietyID = @SocietyID";
 
-                // Create a SqlCommand object to execute the query
+                
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    // Add the parameter value to the SqlCommand object
+                    
                     command.Parameters.AddWithValue("@SocietyID", societyIDToDelete);
 
-                    // Open the connection to the database
+                   
                     connection.Open();
 
-                    // Execute the query
+                    
                     int rowsAffected = command.ExecuteNonQuery();
 
                     if (rowsAffected == 0)
@@ -315,12 +313,12 @@ namespace SeProject
                         MessageBox.Show("Society deleted successfully!");
 
                     }
-                    // Close the connection
+                    
                     connection.Close();
                 }
             }
 
-            // Display a success message
+            
             DisplaySocieties();
 
         }
@@ -330,27 +328,27 @@ namespace SeProject
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
 
-                // Create a SQL query to delete the society from the Societies table
+               
                 string query = "DELETE FROM Memberships WHERE SocietyID = @SocietyID";
 
-                // Create a SqlCommand object to execute the query
+                
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    // Add the parameter value to the SqlCommand object
+                    
                     command.Parameters.AddWithValue("@SocietyID", societyID);
 
-                    // Open the connection to the database
+                    
                     connection.Open();
 
-                    // Execute the query
+                   
                     command.ExecuteNonQuery();
 
-                    // Close the connection
+                   
                     connection.Close();
                 }
             }
 
-            // Display a success message
+            
         }
 
 

@@ -33,8 +33,8 @@ namespace SeProject
         private void button2_Click(object sender, EventArgs e)
         {
             Signup signupForm = new Signup();
-            signupForm.Show(); // Optionally, use ShowDialog() if you want a modal form
-            this.Hide(); // Hide the current form
+            signupForm.Show(); 
+            this.Hide(); 
         }
 
 

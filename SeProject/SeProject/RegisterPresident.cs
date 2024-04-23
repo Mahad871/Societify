@@ -30,15 +30,12 @@ namespace SeProject
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string email = email1.Text; // Assuming you have a TextBox named email1 for email
-            string memberName = name.Text; // Assuming you have a TextBox named name for member name
-            string rollNo = rollnum.Text; // Assuming you have a TextBox named rollnum for roll number
-            string password = password1.Text; // Assuming you have a TextBox named password1 for password
+            string email = email1.Text; 
+            string memberName = name.Text; 
+            string rollNo = rollnum.Text; 
+            string password = password1.Text; 
 
-            // connectionString should be your actual connection string
-            //string connectionString = MahadConnectionString;
-
-            // Check if any of the inputs are null or empty
+           
             if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(memberName) ||
                 string.IsNullOrEmpty(rollNo) || string.IsNullOrEmpty(password))
             {
@@ -53,7 +50,7 @@ namespace SeProject
                     connection.Open();
                     SqlTransaction transaction = connection.BeginTransaction();
 
-                    // Insert the president into the Users table
+                    
                     string sqlInsertUser = @"
                 INSERT INTO Users (Email, MemberName, RollNo, Password, Role)
                 OUTPUT INSERTED.UserID
@@ -64,7 +61,7 @@ namespace SeProject
                         commandInsertUser.Parameters.AddWithValue("@Email", email);
                         commandInsertUser.Parameters.AddWithValue("@MemberName", memberName);
                         commandInsertUser.Parameters.AddWithValue("@RollNo", rollNo);
-                        commandInsertUser.Parameters.AddWithValue("@Password", password); // Remember to hash the password
+                        commandInsertUser.Parameters.AddWithValue("@Password", password); 
                         commandInsertUser.Parameters.AddWithValue("@Role", "President");
 
                         object result = commandInsertUser.ExecuteScalar();

@@ -34,6 +34,7 @@
             linkLabel1 = new LinkLabel();
             ManageSocietiesButton = new Button();
             ManageMember = new Button();
+            manageAnnouncement = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -41,9 +42,8 @@
             // 
             pictureBox1.Image = Properties.Resources.societify;
             pictureBox1.Location = new Point(-1, 0);
-            pictureBox1.Margin = new Padding(3, 4, 3, 4);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(471, 709);
+            pictureBox1.Size = new Size(412, 532);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
@@ -52,9 +52,9 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(750, 57);
+            label1.Location = new Point(656, 43);
             label1.Name = "label1";
-            label1.Size = new Size(265, 37);
+            label1.Size = new Size(201, 30);
             label1.TabIndex = 1;
             label1.Text = "Welcome President";
             label1.TextAlign = ContentAlignment.TopCenter;
@@ -63,9 +63,9 @@
             // 
             pname.AutoSize = true;
             pname.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            pname.Location = new Point(826, 127);
+            pname.Location = new Point(723, 95);
             pname.Name = "pname";
-            pname.Size = new Size(83, 32);
+            pname.Size = new Size(65, 25);
             pname.TabIndex = 2;
             pname.Text = "label2";
             pname.TextAlign = ContentAlignment.TopCenter;
@@ -75,9 +75,9 @@
             linkLabel1.AutoSize = true;
             linkLabel1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             linkLabel1.LinkColor = Color.Black;
-            linkLabel1.Location = new Point(1054, 621);
+            linkLabel1.Location = new Point(922, 466);
             linkLabel1.Name = "linkLabel1";
-            linkLabel1.Size = new Size(87, 28);
+            linkLabel1.Size = new Size(70, 21);
             linkLabel1.TabIndex = 3;
             linkLabel1.TabStop = true;
             linkLabel1.Text = "Log Out";
@@ -85,9 +85,11 @@
             // 
             // ManageSocietiesButton
             // 
-            ManageSocietiesButton.Location = new Point(750, 228);
+            ManageSocietiesButton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            ManageSocietiesButton.Location = new Point(656, 151);
+            ManageSocietiesButton.Margin = new Padding(3, 2, 3, 2);
             ManageSocietiesButton.Name = "ManageSocietiesButton";
-            ManageSocietiesButton.Size = new Size(210, 72);
+            ManageSocietiesButton.Size = new Size(184, 43);
             ManageSocietiesButton.TabIndex = 4;
             ManageSocietiesButton.Text = "Manage Societies";
             ManageSocietiesButton.UseVisualStyleBackColor = true;
@@ -95,27 +97,40 @@
             // 
             // ManageMember
             // 
-            ManageMember.Location = new Point(750, 377);
+            ManageMember.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            ManageMember.Location = new Point(656, 227);
+            ManageMember.Margin = new Padding(3, 2, 3, 2);
             ManageMember.Name = "ManageMember";
-            ManageMember.Size = new Size(210, 72);
+            ManageMember.Size = new Size(184, 43);
             ManageMember.TabIndex = 5;
             ManageMember.Text = "Manage Members";
             ManageMember.UseVisualStyleBackColor = true;
             ManageMember.Click += ManageMember_Click;
             // 
+            // manageAnnouncement
+            // 
+            manageAnnouncement.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            manageAnnouncement.Location = new Point(656, 309);
+            manageAnnouncement.Name = "manageAnnouncement";
+            manageAnnouncement.Size = new Size(184, 43);
+            manageAnnouncement.TabIndex = 6;
+            manageAnnouncement.Text = "Manage Announcement";
+            manageAnnouncement.UseVisualStyleBackColor = true;
+            manageAnnouncement.Click += manageAnnouncement_Click;
+            // 
             // PresidentLogin
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Honeydew;
-            ClientSize = new Size(1179, 709);
+            ClientSize = new Size(1032, 532);
+            Controls.Add(manageAnnouncement);
             Controls.Add(ManageMember);
             Controls.Add(ManageSocietiesButton);
             Controls.Add(linkLabel1);
             Controls.Add(pname);
             Controls.Add(label1);
             Controls.Add(pictureBox1);
-            Margin = new Padding(3, 4, 3, 4);
             Name = "PresidentLogin";
             Text = "PresidentLogin";
             Load += PresidentLogin_Load;
@@ -132,5 +147,6 @@
         private LinkLabel linkLabel1;
         private Button ManageSocietiesButton;
         private Button ManageMember;
+        private Button manageAnnouncement;
     }
 }

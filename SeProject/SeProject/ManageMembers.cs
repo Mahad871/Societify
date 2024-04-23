@@ -27,7 +27,7 @@ namespace SeProject
             this.presidentName = presidentName;
             this.presidentID = presidentID;
             getSocitiesForCurrentPresident();
-            DisplaMembers();
+            DisplayMembers();
         }
 
         public class SocietyItem
@@ -37,31 +37,37 @@ namespace SeProject
 
             public override string ToString()
             {
-                return Name; // This will be displayed in the ComboBox
+                return Name; 
             }
         }
 
         private void ManageMembers_Load(object sender, EventArgs e)
         {
-            string query = "SELECT SocietyID, Name FROM Societies";
+            string query = "SELECT SocietyID, Name FROM Societies WHERE PresidentUserID = @PresidentUserID";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                SqlCommand command = new SqlCommand(query, connection);
-                connection.Open();
-
-                SqlDataReader reader = command.ExecuteReader();
-
-                // Clear the existing items from the combobox
-                SocietyCombobox.Items.Clear();
-
-                // Bind the reader data to the combobox
-                while (reader.Read())
+                using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    SocietyCombobox.Items.Add(new SocietyItem { SocietyID = reader.GetInt32(0), Name = reader.GetString(1) });
-                }
+                    // Add the presidentID parameter to the command
+                    command.Parameters.AddWithValue("@PresidentUserID", presidentID);
 
-                reader.Close();
+                    connection.Open();
+
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        SocietyCombobox.Items.Clear();
+
+                        while (reader.Read())
+                        {
+                            SocietyCombobox.Items.Add(new SocietyItem
+                            {
+                                SocietyID = reader.GetInt32(0),
+                                Name = reader.GetString(1)
+                            });
+                        }
+                    }
+                }
             }
 
             SocietyCombobox.DisplayMember = "Name";
@@ -75,42 +81,7 @@ namespace SeProject
 
         private void SocietyComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            /* if (SocietyCombobox.SelectedItem == null)
-             {
-                 MessageBox.Show("Please select a society");
-                 return;
-             }
-             if (SocietyCombobox.SelectedItem != null) {
-                 *//*selectedSocietyID = SocietyCombobox.SelectedIndex + 1;*//*
-                 string selectedSocietyName = SocietyCombobox.SelectedItem.ToString();
-                 Console.WriteLine(selectedSocietyName);
-
-                 string query = "SELECT SocietyID FROM Societies WHERE Name = @Name";
-                 using (SqlConnection connection = new SqlConnection(connectionString))
-                 {
-                     using (SqlCommand command = new SqlCommand(query, connection))
-                     {
-                         // Add the parameter value to the SqlCommand object
-                         command.Parameters.AddWithValue("@Name", selectedSocietyName);
-
-                         // Open the connection to the database
-                         connection.Open();
-
-                         // Execute the query and get the Society ID
-                         object result = command.ExecuteScalar();
-
-                         // Check if the result is not null and cast it to an integer
-                         if (result != null)
-                         {
-                             selectedSocietyID = (int)result;
-                         }
-
-                         // Close the connection
-                         connection.Close();
-                     }
-                 }
-                 MessageBox.Show("Selected Society ID: " + selectedSocietyID);
-             }*/
+           
         }
 
         private void Role_TextChanged(object sender, EventArgs e)
@@ -162,14 +133,14 @@ namespace SeProject
                         connection.Close();
                     }
                     MessageBox.Show("Member added successfully!");
-                    DisplaMembers();
+                    DisplayMembers();
 
                 }
             }
         }
         private int GetUserIdByRollNo(string rollNo)
         {
-            int userId = -1; // Default value if the roll number is not found
+            int userId = -1; 
 
             string query = "SELECT UserID FROM Users WHERE RollNo = @RollNo";
 
@@ -218,7 +189,7 @@ namespace SeProject
             }
             return "";
         }
-        void DisplaMembers()
+        void DisplayMembers()
         {
 
             string query = "SELECT * FROM Memberships";
@@ -310,16 +281,34 @@ namespace SeProject
 
         private void Delete_Click(object sender, EventArgs e)
         {
-            string Query = "DELETE FROM Memberships WHERE UserID = @UserID AND SocietyID = @SocietyID";
+            string checkRoleQuery = "SELECT Role FROM Memberships WHERE UserID = @UserID AND SocietyID = @SocietyID";
+            string deleteQuery = "DELETE FROM Memberships WHERE UserID = @UserID AND SocietyID = @SocietyID";
+
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                using (SqlCommand command = new SqlCommand(Query, connection))
+                connection.Open();
+
+                // First, check the role of the user
+                using (SqlCommand checkRoleCommand = new SqlCommand(checkRoleQuery, connection))
                 {
-                    command.Parameters.AddWithValue("@UserID", EnterUid.Text);
-                    command.Parameters.AddWithValue("@SocietyID", EnterSId.Text);
-                    connection.Open();
-                    int rowsAffected = command.ExecuteNonQuery();
-                    connection.Close();
+                    checkRoleCommand.Parameters.AddWithValue("@UserID", EnterUid.Text);
+                    checkRoleCommand.Parameters.AddWithValue("@SocietyID", EnterSId.Text);
+
+                    object roleObj = checkRoleCommand.ExecuteScalar();
+                    if (roleObj != null && roleObj.ToString() == "President")
+                    {
+                        MessageBox.Show("Cannot delete a President of the society.");
+                        return; // Exit the method without deleting
+                    }
+                }
+
+                // If the role is not President, proceed with the deletion
+                using (SqlCommand deleteCommand = new SqlCommand(deleteQuery, connection))
+                {
+                    deleteCommand.Parameters.AddWithValue("@UserID", EnterUid.Text);
+                    deleteCommand.Parameters.AddWithValue("@SocietyID", EnterSId.Text);
+
+                    int rowsAffected = deleteCommand.ExecuteNonQuery();
 
                     if (rowsAffected == 0)
                     {
@@ -328,10 +317,13 @@ namespace SeProject
                     else
                     {
                         MessageBox.Show("Member deleted successfully!");
-                        DisplaMembers();
+                        DisplayMembers(); // Ensure this method updates your display to show the member has been deleted
                     }
                 }
+
+                connection.Close();
             }
         }
+
     }
 }

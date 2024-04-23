@@ -28,23 +28,22 @@ namespace SeProject
 
         private void loginbtn_Click(object sender, EventArgs e)
         {
-            string userid = userid1.Text; // Assuming the TextBox for userID is named useridTextBox
-            string password = password1.Text; // Assuming the TextBox for password is named passwordTextBox
+            string userid = userid1.Text; 
+            string password = password1.Text; 
             string selectedRole = RoleDropDown.Text.ToString();
             string membername;
-            // Replace with your actual connection string
-            //string connectionString = @"Server=YOUR_SERVER_NAME;Database=seproject;Integrated Security=True;";
+            
 
             try
             {
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
-                    // SQL command to select the user with the given userID and password
+                   
                     string sql = "SELECT COUNT(1) FROM Users WHERE UserID=@UserID AND Password=@Password";
                     if (selectedRole == "Admin")
                     {
-                        // Extend SQL to check if the user is an admin
+                        
                         sql += " AND UserID IN (SELECT UserID FROM Admins)";
                     }
                     else if (selectedRole == "President")
@@ -55,7 +54,7 @@ namespace SeProject
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
                         command.Parameters.AddWithValue("@UserID", userid);
-                        command.Parameters.AddWithValue("@Password", password); // Consider using hashed passwords
+                        command.Parameters.AddWithValue("@Password", password); 
                         if (selectedRole == "President")
                         {
                             command.Parameters.AddWithValue("@Role", selectedRole);
@@ -65,7 +64,7 @@ namespace SeProject
                         if (count == 1)
                         {
                             string sql1 = "SELECT MemberName FROM Users WHERE UserID=@UserID AND Password=@Password";
-                            // Login successful
+                           
                             
                             using (SqlCommand command1 = new SqlCommand(sql1, connection))
 
@@ -75,7 +74,7 @@ namespace SeProject
                                 var result = command1.ExecuteScalar();
                                 membername = result?.ToString();
                             }
-                                //MessageBox.Show($"Login Successful as {selectedRole}");
+                                
                                 if (selectedRole == "Admin")
                             {
                                 AdminHomepage adminLogin = new AdminHomepage(membername);
@@ -84,8 +83,8 @@ namespace SeProject
                             }
                             else if (selectedRole == "President")
                             {
-                                // Assuming PresidentLogin is the form you want to show for presidents
-                                PresidentLogin presidentLogin = new PresidentLogin(membername, userid); //chnage later to president id
+                                
+                                PresidentLogin presidentLogin = new PresidentLogin(membername, userid); 
                                 presidentLogin.Show();
                                 this.Hide();
                             }
@@ -94,7 +93,7 @@ namespace SeProject
                         }
                         else
                         {
-                            // Login failed
+                           
                             MessageBox.Show("Login Failed. Please check your UserID, Password, and Role.");
                         }
                     }

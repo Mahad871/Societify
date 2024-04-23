@@ -53,11 +53,11 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(676, 51);
+            label1.Location = new Point(637, 50);
             label1.Name = "label1";
-            label1.Size = new Size(142, 30);
+            label1.Size = new Size(220, 30);
             label1.TabIndex = 1;
-            label1.Text = "Add Member";
+            label1.Text = "Member Registration";
             // 
             // email1
             // 

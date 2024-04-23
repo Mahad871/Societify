@@ -56,5 +56,12 @@ namespace SeProject
             manageSociety.Show();
             this.Hide();
         }
+
+        private void manageAnnouncement_Click(object sender, EventArgs e)
+        {
+            ManageAnnouncement manageSociety = new ManageAnnouncement(presidentName, presidentID);
+            manageSociety.Show();
+            this.Hide();
+        }
     }
 }

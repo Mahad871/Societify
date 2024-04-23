@@ -1,5 +1,3 @@
---create database seproject
-
 use seproject
 
 CREATE TABLE Users (
@@ -14,7 +12,6 @@ CREATE TABLE Users (
 CREATE TABLE Societies (
     SocietyID INT IDENTITY PRIMARY KEY,
     Name VARCHAR(255) NOT NULL,
-    Bio VARCHAR(255) NOT NULL,
     Description VARCHAR(MAX),
     PresidentUserID INT,
     CONSTRAINT FK_Societies_PresidentUserID FOREIGN KEY (PresidentUserID) REFERENCES Users(UserID)
@@ -73,8 +70,7 @@ CREATE TABLE Admins (
 
 select *from Users
 select *from Admins
-select *from Societies
-select *from Memberships
+select *from Announcements
 
 INSERT INTO Users (Email, MemberName, RollNo, Password)
 VALUES ('user@example.com', 'John Doe', '12345', 'userPassword123');
@@ -82,4 +78,45 @@ VALUES ('user@example.com', 'John Doe', '12345', 'userPassword123');
 ALTER TABLE Users
 ADD Role VARCHAR(50) NULL,
 CONSTRAINT CHK_Users_Role CHECK (Role IN ('President', 'Member') OR Role IS NULL);
+
+ALTER TABLE Societies
+ADD Bio VARCHAR(MAX);
+
+select *from Societies
+select * from Announcements
+select *from Memberships
+
+delete from Memberships
+delete from Societies
+delete from Announcements
+
+-- Drop existing foreign key constraints
+ALTER TABLE Announcements DROP CONSTRAINT FK_Announcements_SocietyID;
+ALTER TABLE Memberships DROP CONSTRAINT FK_Memberships_SocietyID;
+
+-- Add new foreign key constraints with ON DELETE CASCADE
+ALTER TABLE Announcements
+ADD CONSTRAINT FK_Announcements_SocietyID 
+FOREIGN KEY (SocietyID) REFERENCES Societies(SocietyID) ON DELETE CASCADE;
+
+ALTER TABLE Memberships
+ADD CONSTRAINT FK_Memberships_SocietyID 
+FOREIGN KEY (SocietyID) REFERENCES Societies(SocietyID) ON DELETE CASCADE;
+
+CREATE TRIGGER trg_UpdateUserRoleOnSocietyDelete
+ON Societies
+FOR DELETE
+AS
+BEGIN
+    SET NOCOUNT ON;
+    
+    -- Update the Role of the president in the Users table to 'Member' when their society is deleted
+    UPDATE Users
+    SET Role = 'Member'
+    FROM Users
+    INNER JOIN deleted ON Users.UserID = deleted.PresidentUserID
+    WHERE Users.Role = 'President'; -- Ensures that only presidents are downgraded to members
+
+    -- Additional logic can be added here to handle presidents with multiple societies
+END;
 

@@ -14,9 +14,7 @@ namespace SeProject
 {
     public partial class Signup : Form
 
-    {   //@"Server=LAPTOP-LA4CMMH4;Database=seproject;Integrated Security=True;"//Mahad's Connection String
-        //@"Server=LAPTOP-K1O0L2VM\SQLEXPRESS;Database=seproject;Integrated Security=True;"//Ahmad Connection String
-        //string connectionString = MahadConnectionString;
+    {  
         public Signup()
         {
             InitializeComponent();
@@ -49,13 +47,13 @@ namespace SeProject
 
         private void signupbtn_Click(object sender, EventArgs e)
         {
-            // Assuming you have TextBoxes named appropriately
+            
             string rollno = textBox1.Text;
             string email = Email.Text;
             string memberName = name.Text;
-            string password = Password.Text; // Consider hashing the password
+            string password = Password.Text; 
             int newUserId;
-            // Validate input
+            
             if (string.IsNullOrWhiteSpace(rollno) || string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(memberName) || string.IsNullOrWhiteSpace(password))
             {
                 MessageBox.Show("Please fill in all fields.");
@@ -68,7 +66,7 @@ namespace SeProject
                 {
                     connection.Open();
 
-                    // First, insert the new admin user into the Users table
+                    
                     string sqlInsertUser = "INSERT INTO Users (Email, MemberName, Password, RollNo) OUTPUT INSERTED.UserID VALUES (@Email, @MemberName, @Password, @RollNo);";
 
                     using (SqlCommand commandInsertUser = new SqlCommand(sqlInsertUser, connection))
@@ -77,10 +75,10 @@ namespace SeProject
                         commandInsertUser.Parameters.AddWithValue("@MemberName", memberName);
                         commandInsertUser.Parameters.AddWithValue("@Password", password);
                         commandInsertUser.Parameters.AddWithValue("@RollNo", rollno);
-                        // Execute and get the inserted user's ID
+                        
                         newUserId = (int)commandInsertUser.ExecuteScalar();
 
-                        // Now, insert a reference to this user in the Admins table
+                        
                         string sqlInsertAdmin = "INSERT INTO Admins (UserID) VALUES (@UserID);";
                         using (SqlCommand commandInsertAdmin = new SqlCommand(sqlInsertAdmin, connection))
                         {
@@ -91,9 +89,9 @@ namespace SeProject
                 }
 
                 MessageBox.Show($"Admin signup successful! \nUserID: {newUserId}\nPassword: {password}", "Registration Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Hide(); // Hide the current form
+                this.Hide(); 
                 Form1 homePage = new Form1();
-                homePage.Show(); // Show the homepage
+                homePage.Show(); 
             }
             catch (Exception ex)
             {
