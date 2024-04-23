@@ -14,7 +14,7 @@ namespace SeProject
 {
     public partial class Signup : Form
 
-    {  
+    {
         public Signup()
         {
             InitializeComponent();
@@ -47,13 +47,13 @@ namespace SeProject
 
         private void signupbtn_Click(object sender, EventArgs e)
         {
-            
+
             string rollno = textBox1.Text;
             string email = Email.Text;
             string memberName = name.Text;
-            string password = Password.Text; 
+            string password = Password.Text;
             int newUserId;
-            
+
             if (string.IsNullOrWhiteSpace(rollno) || string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(memberName) || string.IsNullOrWhiteSpace(password))
             {
                 MessageBox.Show("Please fill in all fields.");
@@ -66,7 +66,7 @@ namespace SeProject
                 {
                     connection.Open();
 
-                    
+
                     string sqlInsertUser = "INSERT INTO Users (Email, MemberName, Password, RollNo) OUTPUT INSERTED.UserID VALUES (@Email, @MemberName, @Password, @RollNo);";
 
                     using (SqlCommand commandInsertUser = new SqlCommand(sqlInsertUser, connection))
@@ -75,10 +75,10 @@ namespace SeProject
                         commandInsertUser.Parameters.AddWithValue("@MemberName", memberName);
                         commandInsertUser.Parameters.AddWithValue("@Password", password);
                         commandInsertUser.Parameters.AddWithValue("@RollNo", rollno);
-                        
+
                         newUserId = (int)commandInsertUser.ExecuteScalar();
 
-                        
+
                         string sqlInsertAdmin = "INSERT INTO Admins (UserID) VALUES (@UserID);";
                         using (SqlCommand commandInsertAdmin = new SqlCommand(sqlInsertAdmin, connection))
                         {
@@ -89,9 +89,9 @@ namespace SeProject
                 }
 
                 MessageBox.Show($"Admin signup successful! \nUserID: {newUserId}\nPassword: {password}", "Registration Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Hide(); 
+                this.Hide();
                 Form1 homePage = new Form1();
-                homePage.Show(); 
+                homePage.Show();
             }
             catch (Exception ex)
             {
@@ -102,6 +102,13 @@ namespace SeProject
         private void Email_TextChanged_1(object sender, EventArgs e)
         {
 
+        }
+
+        private void back_Click(object sender, EventArgs e)
+        {
+            Form1 form1 = new Form1();
+            form1.Show();
+            this.Hide();
         }
     }
 }

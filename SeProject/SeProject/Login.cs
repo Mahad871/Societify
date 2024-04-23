@@ -14,7 +14,7 @@ using static SeProject.constants;
 namespace SeProject
 {
     public partial class Login : Form
-    {  
+    {
 
         public Login()
         {
@@ -28,25 +28,29 @@ namespace SeProject
 
         private void loginbtn_Click(object sender, EventArgs e)
         {
-            string userid = userid1.Text; 
-            string password = password1.Text; 
+            string userid = userid1.Text;
+            string password = password1.Text;
             string selectedRole = RoleDropDown.Text.ToString();
             string membername;
-            
+
 
             try
             {
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
-                   
+
                     string sql = "SELECT COUNT(1) FROM Users WHERE UserID=@UserID AND Password=@Password";
                     if (selectedRole == "Admin")
                     {
-                        
+
                         sql += " AND UserID IN (SELECT UserID FROM Admins)";
                     }
                     else if (selectedRole == "President")
+                    {
+                        sql += " AND Role = @Role";
+                    }
+                    else if (selectedRole == "Member")
                     {
                         sql += " AND Role = @Role";
                     }
@@ -54,18 +58,23 @@ namespace SeProject
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
                         command.Parameters.AddWithValue("@UserID", userid);
-                        command.Parameters.AddWithValue("@Password", password); 
+                        command.Parameters.AddWithValue("@Password", password);
                         if (selectedRole == "President")
                         {
                             command.Parameters.AddWithValue("@Role", selectedRole);
+                        }
+                        if (selectedRole == "Member")
+                        {
+                            command.Parameters.AddWithValue("@Role", selectedRole);
+
                         }
                         int count = Convert.ToInt32(command.ExecuteScalar());
 
                         if (count == 1)
                         {
                             string sql1 = "SELECT MemberName FROM Users WHERE UserID=@UserID AND Password=@Password";
-                           
-                            
+
+
                             using (SqlCommand command1 = new SqlCommand(sql1, connection))
 
                             {
@@ -74,8 +83,8 @@ namespace SeProject
                                 var result = command1.ExecuteScalar();
                                 membername = result?.ToString();
                             }
-                                
-                                if (selectedRole == "Admin")
+
+                            if (selectedRole == "Admin")
                             {
                                 AdminHomepage adminLogin = new AdminHomepage(membername);
                                 adminLogin.Show();
@@ -83,9 +92,15 @@ namespace SeProject
                             }
                             else if (selectedRole == "President")
                             {
-                                
-                                PresidentLogin presidentLogin = new PresidentLogin(membername, userid); 
+
+                                PresidentLogin presidentLogin = new PresidentLogin(membername, userid);
                                 presidentLogin.Show();
+                                this.Hide();
+                            }
+                            else if (selectedRole == "Member")
+                            {
+                                MemberHomePage memberLogin = new MemberHomePage(membername, userid);
+                                memberLogin.Show();
                                 this.Hide();
                             }
 
@@ -93,7 +108,7 @@ namespace SeProject
                         }
                         else
                         {
-                           
+
                             MessageBox.Show("Login Failed. Please check your UserID, Password, and Role.");
                         }
                     }
@@ -119,6 +134,13 @@ namespace SeProject
         private void Login_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void back_Click(object sender, EventArgs e)
+        {
+            Form1 form1 = new Form1();
+            form1.Show();
+            this.Hide();
         }
     }
 }

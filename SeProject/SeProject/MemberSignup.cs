@@ -23,21 +23,16 @@ namespace SeProject
             InitializeComponent();
         }
 
-        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
-        {
-            Form1 form1 = new Form1();
-            form1.Show();
-            this.Hide();
-        }
+
 
         private void button1_Click(object sender, EventArgs e)
         {
             string rollno = rollnum1.Text;
             string email = email1.Text;
             string memberName = member1.Text;
-            string password = passwd1.Text; 
+            string password = passwd1.Text;
             int newUserId;
-           
+
             if (string.IsNullOrWhiteSpace(rollno) || string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(memberName) || string.IsNullOrWhiteSpace(password))
             {
                 MessageBox.Show("Please fill in all fields.");
@@ -50,7 +45,7 @@ namespace SeProject
                 {
                     connection.Open();
 
-                   
+
                     string sqlInsertUser = "INSERT INTO Users (Email, MemberName, Password, RollNo,Role) OUTPUT INSERTED.UserID VALUES (@Email, @MemberName, @Password, @RollNo,@Role);";
 
                     using (SqlCommand commandInsertUser = new SqlCommand(sqlInsertUser, connection))
@@ -60,23 +55,30 @@ namespace SeProject
                         commandInsertUser.Parameters.AddWithValue("@Password", password);
                         commandInsertUser.Parameters.AddWithValue("@RollNo", rollno);
                         commandInsertUser.Parameters.AddWithValue("@Role", "Member");
-                        
+
                         newUserId = (int)commandInsertUser.ExecuteScalar();
 
-                      
-                        
+
+
                     }
                 }
 
                 MessageBox.Show($"Member signup successful! \nUserID: {newUserId}\nPassword: {password}", "Registration Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                this.Hide(); 
+                this.Hide();
                 Form1 homePage = new Form1();
-                homePage.Show(); 
+                homePage.Show();
             }
             catch (Exception ex)
             {
                 MessageBox.Show($"Failed to signup. Error: {ex.Message}");
             }
+        }
+
+        private void back_Click(object sender, EventArgs e)
+        {
+            Form1 form1 = new Form1();
+            form1.Show();
+            this.Hide();
         }
     }
 }

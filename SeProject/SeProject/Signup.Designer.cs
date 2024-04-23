@@ -35,6 +35,7 @@
             Password = new TextBox();
             signupbtn = new Button();
             Email = new TextBox();
+            back = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
             // 
@@ -113,12 +114,24 @@
             Email.TabIndex = 8;
             Email.TextChanged += Email_TextChanged_1;
             // 
+            // back
+            // 
+            back.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            back.Location = new Point(492, 27);
+            back.Name = "back";
+            back.Size = new Size(165, 40);
+            back.TabIndex = 9;
+            back.Text = "Back";
+            back.UseVisualStyleBackColor = true;
+            back.Click += back_Click;
+            // 
             // Signup
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Honeydew;
             ClientSize = new Size(1179, 709);
+            Controls.Add(back);
             Controls.Add(Email);
             Controls.Add(signupbtn);
             Controls.Add(Password);
@@ -144,5 +157,6 @@
         private TextBox Password;
         private Button signupbtn;
         private TextBox Email;
+        private Button back;
     }
 }

@@ -35,6 +35,7 @@
             userid1 = new TextBox();
             password1 = new TextBox();
             loginbtn = new Button();
+            back = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -118,12 +119,24 @@
             loginbtn.UseVisualStyleBackColor = false;
             loginbtn.Click += loginbtn_Click;
             // 
+            // back
+            // 
+            back.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            back.Location = new Point(501, 43);
+            back.Name = "back";
+            back.Size = new Size(165, 40);
+            back.TabIndex = 7;
+            back.Text = "Back";
+            back.UseVisualStyleBackColor = true;
+            back.Click += back_Click;
+            // 
             // Login
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Honeydew;
             ClientSize = new Size(1179, 709);
+            Controls.Add(back);
             Controls.Add(loginbtn);
             Controls.Add(password1);
             Controls.Add(userid1);
@@ -149,5 +162,6 @@
         private TextBox userid1;
         private TextBox password1;
         private Button loginbtn;
+        private Button back;
     }
 }

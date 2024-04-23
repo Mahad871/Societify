@@ -38,11 +38,11 @@
             back = new Button();
             backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             panel2 = new Panel();
+            editbutton = new Button();
             deletebutton = new Button();
             announcemntsgrid = new DataGridView();
             label2 = new Label();
             databaseGeneratedAttributeBindingSource = new BindingSource(components);
-            editbutton = new Button();
             panel1.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)announcemntsgrid).BeginInit();
@@ -57,19 +57,17 @@
             panel1.Controls.Add(announcements);
             panel1.Controls.Add(titles);
             panel1.Controls.Add(label1);
-            panel1.Location = new Point(55, 70);
-            panel1.Margin = new Padding(3, 2, 3, 2);
+            panel1.Location = new Point(63, 93);
             panel1.Name = "panel1";
-            panel1.Size = new Size(362, 392);
+            panel1.Size = new Size(414, 523);
             panel1.TabIndex = 0;
             // 
             // SocietyCombobox
             // 
             SocietyCombobox.FormattingEnabled = true;
-            SocietyCombobox.Location = new Point(24, 129);
-            SocietyCombobox.Margin = new Padding(3, 2, 3, 2);
+            SocietyCombobox.Location = new Point(27, 172);
             SocietyCombobox.Name = "SocietyCombobox";
-            SocietyCombobox.Size = new Size(312, 23);
+            SocietyCombobox.Size = new Size(356, 28);
             SocietyCombobox.TabIndex = 4;
             SocietyCombobox.Text = "Select Society";
             SocietyCombobox.SelectedIndexChanged += SocietyCombobox_SelectedIndexChanged;
@@ -79,10 +77,9 @@
             add.BackColor = SystemColors.GradientActiveCaption;
             add.FlatStyle = FlatStyle.Flat;
             add.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            add.Location = new Point(104, 319);
-            add.Margin = new Padding(3, 2, 3, 2);
+            add.Location = new Point(119, 425);
             add.Name = "add";
-            add.Size = new Size(148, 34);
+            add.Size = new Size(169, 45);
             add.TabIndex = 3;
             add.Text = "Add Announcement";
             add.UseVisualStyleBackColor = false;
@@ -90,40 +87,39 @@
             // 
             // announcements
             // 
-            announcements.Location = new Point(24, 168);
+            announcements.Location = new Point(27, 224);
+            announcements.Margin = new Padding(3, 4, 3, 4);
             announcements.Multiline = true;
             announcements.Name = "announcements";
             announcements.PlaceholderText = "Add Announcement Content";
-            announcements.Size = new Size(312, 122);
+            announcements.Size = new Size(356, 161);
             announcements.TabIndex = 2;
             announcements.TextChanged += announcement_TextChanged;
             // 
             // titles
             // 
-            titles.Location = new Point(24, 89);
-            titles.Margin = new Padding(3, 2, 3, 2);
+            titles.Location = new Point(27, 119);
             titles.Name = "titles";
             titles.PlaceholderText = "Announcement Title";
-            titles.Size = new Size(312, 23);
+            titles.Size = new Size(356, 27);
             titles.TabIndex = 1;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(75, 19);
+            label1.Location = new Point(86, 25);
             label1.Name = "label1";
-            label1.Size = new Size(205, 30);
+            label1.Size = new Size(263, 37);
             label1.TabIndex = 0;
             label1.Text = "Add Announcement";
             // 
             // back
             // 
             back.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            back.Location = new Point(55, 31);
-            back.Margin = new Padding(3, 2, 3, 2);
+            back.Location = new Point(63, 41);
             back.Name = "back";
-            back.Size = new Size(144, 30);
+            back.Size = new Size(165, 40);
             back.TabIndex = 1;
             back.Text = "Back";
             back.UseVisualStyleBackColor = true;
@@ -135,21 +131,33 @@
             panel2.Controls.Add(editbutton);
             panel2.Controls.Add(deletebutton);
             panel2.Controls.Add(announcemntsgrid);
-            panel2.Location = new Point(455, 70);
-            panel2.Margin = new Padding(3, 2, 3, 2);
+            panel2.Location = new Point(520, 93);
             panel2.Name = "panel2";
-            panel2.Size = new Size(695, 392);
+            panel2.Size = new Size(794, 523);
             panel2.TabIndex = 2;
+            // 
+            // editbutton
+            // 
+            editbutton.BackColor = SystemColors.GradientActiveCaption;
+            editbutton.FlatStyle = FlatStyle.Flat;
+            editbutton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            editbutton.Location = new Point(18, 467);
+            editbutton.Margin = new Padding(3, 4, 3, 4);
+            editbutton.Name = "editbutton";
+            editbutton.Size = new Size(169, 45);
+            editbutton.TabIndex = 2;
+            editbutton.Text = "Edit";
+            editbutton.UseVisualStyleBackColor = false;
+            editbutton.Click += editbutton_Click;
             // 
             // deletebutton
             // 
             deletebutton.BackColor = SystemColors.GradientActiveCaption;
             deletebutton.FlatStyle = FlatStyle.Flat;
             deletebutton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            deletebutton.Location = new Point(532, 350);
-            deletebutton.Margin = new Padding(3, 2, 3, 2);
+            deletebutton.Location = new Point(608, 467);
             deletebutton.Name = "deletebutton";
-            deletebutton.Size = new Size(148, 34);
+            deletebutton.Size = new Size(169, 45);
             deletebutton.TabIndex = 1;
             deletebutton.Text = "Delete";
             deletebutton.UseVisualStyleBackColor = false;
@@ -159,11 +167,11 @@
             // 
             announcemntsgrid.BackgroundColor = Color.Honeydew;
             announcemntsgrid.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            announcemntsgrid.Location = new Point(16, 22);
-            announcemntsgrid.Margin = new Padding(3, 2, 3, 2);
+            announcemntsgrid.Location = new Point(18, 29);
             announcemntsgrid.Name = "announcemntsgrid";
+            announcemntsgrid.RowHeadersWidth = 51;
             announcemntsgrid.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            announcemntsgrid.Size = new Size(664, 311);
+            announcemntsgrid.Size = new Size(759, 415);
             announcemntsgrid.TabIndex = 0;
             announcemntsgrid.CellContentClick += announcemntsgrid_CellContentClick;
             // 
@@ -171,9 +179,9 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label2.Location = new Point(495, 33);
+            label2.Location = new Point(566, 44);
             label2.Name = "label2";
-            label2.Size = new Size(259, 30);
+            label2.Size = new Size(335, 37);
             label2.TabIndex = 3;
             label2.Text = "Manage Announcements";
             // 
@@ -181,29 +189,17 @@
             // 
             databaseGeneratedAttributeBindingSource.DataSource = typeof(System.ComponentModel.DataAnnotations.Schema.DatabaseGeneratedAttribute);
             // 
-            // editbutton
-            // 
-            editbutton.BackColor = SystemColors.GradientActiveCaption;
-            editbutton.FlatStyle = FlatStyle.Flat;
-            editbutton.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            editbutton.Location = new Point(16, 350);
-            editbutton.Name = "editbutton";
-            editbutton.Size = new Size(148, 34);
-            editbutton.TabIndex = 2;
-            editbutton.Text = "Edit";
-            editbutton.UseVisualStyleBackColor = false;
-            editbutton.Click += editbutton_Click;
-            // 
             // ManageAnnouncement
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Honeydew;
-            ClientSize = new Size(1196, 493);
+            ClientSize = new Size(1367, 657);
             Controls.Add(label2);
             Controls.Add(panel2);
             Controls.Add(back);
             Controls.Add(panel1);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "ManageAnnouncement";
             Text = "ManageAnnouncement";
             Load += ManageAnnouncement_Load;
