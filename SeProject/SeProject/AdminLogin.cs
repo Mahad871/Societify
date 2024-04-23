@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace SeProject
 {
-    public partial class AdminLogin : Form
+    public partial class AdminHomepage : Form
     {
-        public AdminLogin(string adminName)
+        public AdminHomepage(string adminName)
         {
             InitializeComponent();
             label1.Text += adminName;

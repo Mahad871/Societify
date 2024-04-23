@@ -1,3 +1,5 @@
+--create database seproject
+
 use seproject
 
 CREATE TABLE Users (
@@ -12,6 +14,7 @@ CREATE TABLE Users (
 CREATE TABLE Societies (
     SocietyID INT IDENTITY PRIMARY KEY,
     Name VARCHAR(255) NOT NULL,
+    Bio VARCHAR(255) NOT NULL,
     Description VARCHAR(MAX),
     PresidentUserID INT,
     CONSTRAINT FK_Societies_PresidentUserID FOREIGN KEY (PresidentUserID) REFERENCES Users(UserID)
@@ -70,6 +73,8 @@ CREATE TABLE Admins (
 
 select *from Users
 select *from Admins
+select *from Societies
+select *from Memberships
 
 INSERT INTO Users (Email, MemberName, RollNo, Password)
 VALUES ('user@example.com', 'John Doe', '12345', 'userPassword123');
@@ -77,3 +82,4 @@ VALUES ('user@example.com', 'John Doe', '12345', 'userPassword123');
 ALTER TABLE Users
 ADD Role VARCHAR(50) NULL,
 CONSTRAINT CHK_Users_Role CHECK (Role IN ('President', 'Member') OR Role IS NULL);
+

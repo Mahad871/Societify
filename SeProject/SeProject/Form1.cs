@@ -42,5 +42,12 @@ namespace SeProject
         {
 
         }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            MemberSignup memberSignup  =new MemberSignup();
+            memberSignup.Show();
+            this.Hide();
+        }
     }
 }

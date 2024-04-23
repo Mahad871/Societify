@@ -8,12 +8,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using static SeProject.constants;
+
 
 namespace SeProject
 {
     public partial class Login : Form
-    {
-        string connectionString = @"Server=LAPTOP-K1O0L2VM\SQLEXPRESS;Database=seproject;Integrated Security=True;";
+    {  
 
         public Login()
         {
@@ -29,7 +30,7 @@ namespace SeProject
         {
             string userid = userid1.Text; // Assuming the TextBox for userID is named useridTextBox
             string password = password1.Text; // Assuming the TextBox for password is named passwordTextBox
-            string selectedRole = comboBox1.Text.ToString();
+            string selectedRole = RoleDropDown.Text.ToString();
             string membername;
             // Replace with your actual connection string
             //string connectionString = @"Server=YOUR_SERVER_NAME;Database=seproject;Integrated Security=True;";
@@ -77,14 +78,14 @@ namespace SeProject
                                 //MessageBox.Show($"Login Successful as {selectedRole}");
                                 if (selectedRole == "Admin")
                             {
-                                AdminLogin adminLogin = new AdminLogin(membername);
+                                AdminHomepage adminLogin = new AdminHomepage(membername);
                                 adminLogin.Show();
                                 this.Hide();
                             }
                             else if (selectedRole == "President")
                             {
                                 // Assuming PresidentLogin is the form you want to show for presidents
-                                PresidentLogin presidentLogin = new PresidentLogin(membername);
+                                PresidentLogin presidentLogin = new PresidentLogin(membername, userid); //chnage later to president id
                                 presidentLogin.Show();
                                 this.Hide();
                             }

@@ -40,6 +40,7 @@
             imageList3 = new ImageList(components);
             imageList4 = new ImageList(components);
             pictureBox2 = new PictureBox();
+            button2 = new Button();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
@@ -63,7 +64,7 @@
             pictureBox1.Image = Properties.Resources.best_university_societies;
             pictureBox1.Location = new Point(1, 0);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(426, 534);
+            pictureBox1.Size = new Size(448, 534);
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
@@ -74,7 +75,7 @@
             button1.BackColor = Color.PaleGreen;
             button1.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             button1.ForeColor = SystemColors.ActiveCaptionText;
-            button1.Location = new Point(672, 382);
+            button1.Location = new Point(672, 348);
             button1.Name = "button1";
             button1.Size = new Size(129, 48);
             button1.TabIndex = 2;
@@ -87,7 +88,7 @@
             signup.BackColor = Color.Firebrick;
             signup.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             signup.ForeColor = SystemColors.ButtonFace;
-            signup.Location = new Point(672, 466);
+            signup.Location = new Point(672, 411);
             signup.Name = "signup";
             signup.Size = new Size(129, 48);
             signup.TabIndex = 3;
@@ -110,14 +111,26 @@
             // pictureBox2
             // 
             pictureBox2.Image = Properties.Resources.societify;
-            pictureBox2.Location = new Point(275, -48);
+            pictureBox2.Location = new Point(245, -48);
             pictureBox2.Margin = new Padding(3, 2, 3, 2);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(920, 611);
+            pictureBox2.Size = new Size(993, 582);
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
             pictureBox2.TabIndex = 4;
             pictureBox2.TabStop = false;
             pictureBox2.Click += pictureBox2_Click;
+            // 
+            // button2
+            // 
+            button2.BackColor = Color.Coral;
+            button2.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button2.Location = new Point(672, 472);
+            button2.Name = "button2";
+            button2.Size = new Size(129, 48);
+            button2.TabIndex = 5;
+            button2.Text = "Member Signup";
+            button2.UseVisualStyleBackColor = false;
+            button2.Click += button2_Click_1;
             // 
             // Form1
             // 
@@ -125,6 +138,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Honeydew;
             ClientSize = new Size(1032, 532);
+            Controls.Add(button2);
             Controls.Add(signup);
             Controls.Add(button1);
             Controls.Add(pictureBox1);
@@ -149,5 +163,6 @@
         private ImageList imageList3;
         private ImageList imageList4;
         private PictureBox pictureBox2;
+        private Button button2;
     }
 }

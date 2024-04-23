@@ -1,59 +1,41 @@
 ﻿using System;
-using System.Data.SqlClient;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using static SeProject.constants;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+
 
 namespace SeProject
 {
-    public partial class Signup : Form
-
-    {   //@"Server=LAPTOP-LA4CMMH4;Database=seproject;Integrated Security=True;"//Mahad's Connection String
-        //@"Server=LAPTOP-K1O0L2VM\SQLEXPRESS;Database=seproject;Integrated Security=True;"//Ahmad Connection String
-        //string connectionString = MahadConnectionString;
-        public Signup()
+    public partial class MemberSignup : Form
+    {
+        public MemberSignup()
         {
             InitializeComponent();
         }
 
-        private void Signup_Load(object sender, EventArgs e)
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-
+            Form1 form1 = new Form1();
+            form1.Show();
+            this.Hide();
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-
-        }
-
-        private void email_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void Password_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void name_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void signupbtn_Click(object sender, EventArgs e)
-        {
-            // Assuming you have TextBoxes named appropriately
-            string rollno = textBox1.Text;
-            string email = Email.Text;
-            string memberName = name.Text;
-            string password = Password.Text; // Consider hashing the password
+            string rollno = rollnum1.Text;
+            string email = email1.Text;
+            string memberName = member1.Text;
+            string password = passwd1.Text; // Consider hashing the password
             int newUserId;
             // Validate input
             if (string.IsNullOrWhiteSpace(rollno) || string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(memberName) || string.IsNullOrWhiteSpace(password))
@@ -69,7 +51,7 @@ namespace SeProject
                     connection.Open();
 
                     // First, insert the new admin user into the Users table
-                    string sqlInsertUser = "INSERT INTO Users (Email, MemberName, Password, RollNo) OUTPUT INSERTED.UserID VALUES (@Email, @MemberName, @Password, @RollNo);";
+                    string sqlInsertUser = "INSERT INTO Users (Email, MemberName, Password, RollNo,Role) OUTPUT INSERTED.UserID VALUES (@Email, @MemberName, @Password, @RollNo,@Role);";
 
                     using (SqlCommand commandInsertUser = new SqlCommand(sqlInsertUser, connection))
                     {
@@ -77,20 +59,16 @@ namespace SeProject
                         commandInsertUser.Parameters.AddWithValue("@MemberName", memberName);
                         commandInsertUser.Parameters.AddWithValue("@Password", password);
                         commandInsertUser.Parameters.AddWithValue("@RollNo", rollno);
+                        commandInsertUser.Parameters.AddWithValue("@Role", "Member");
                         // Execute and get the inserted user's ID
                         newUserId = (int)commandInsertUser.ExecuteScalar();
 
                         // Now, insert a reference to this user in the Admins table
-                        string sqlInsertAdmin = "INSERT INTO Admins (UserID) VALUES (@UserID);";
-                        using (SqlCommand commandInsertAdmin = new SqlCommand(sqlInsertAdmin, connection))
-                        {
-                            commandInsertAdmin.Parameters.AddWithValue("@UserID", newUserId);
-                            commandInsertAdmin.ExecuteNonQuery();
-                        }
+                        
                     }
                 }
 
-                MessageBox.Show($"Admin signup successful! \nUserID: {newUserId}\nPassword: {password}", "Registration Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show($"Member signup successful! \nUserID: {newUserId}\nPassword: {password}", "Registration Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 this.Hide(); // Hide the current form
                 Form1 homePage = new Form1();
                 homePage.Show(); // Show the homepage
@@ -99,11 +77,6 @@ namespace SeProject
             {
                 MessageBox.Show($"Failed to signup. Error: {ex.Message}");
             }
-        }
-
-        private void Email_TextChanged_1(object sender, EventArgs e)
-        {
-
         }
     }
 }

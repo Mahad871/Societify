@@ -1,6 +1,6 @@
 ﻿namespace SeProject
 {
-    partial class RegisterPresident
+    partial class MemberSignup
     {
         /// <summary>
         /// Required designer variable.
@@ -31,9 +31,9 @@
             pictureBox1 = new PictureBox();
             label1 = new Label();
             email1 = new TextBox();
-            name = new TextBox();
-            rollnum = new TextBox();
-            password1 = new TextBox();
+            member1 = new TextBox();
+            rollnum1 = new TextBox();
+            passwd1 = new TextBox();
             button1 = new Button();
             linkLabel1 = new LinkLabel();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -48,60 +48,58 @@
             pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
-            pictureBox1.Click += pictureBox1_Click;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 15.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(650, 39);
+            label1.Location = new Point(676, 51);
             label1.Name = "label1";
-            label1.Size = new Size(190, 30);
+            label1.Size = new Size(142, 30);
             label1.TabIndex = 1;
-            label1.Text = "Register President";
-            label1.TextAlign = ContentAlignment.TopCenter;
+            label1.Text = "Add Member";
             // 
             // email1
             // 
-            email1.Location = new Point(650, 112);
+            email1.Location = new Point(637, 130);
             email1.Name = "email1";
             email1.PlaceholderText = "Enter Email";
-            email1.Size = new Size(190, 23);
+            email1.Size = new Size(205, 23);
             email1.TabIndex = 2;
             // 
-            // name
+            // member1
             // 
-            name.Location = new Point(650, 160);
-            name.Name = "name";
-            name.PlaceholderText = "Enter President Name";
-            name.Size = new Size(190, 23);
-            name.TabIndex = 3;
+            member1.Location = new Point(637, 182);
+            member1.Name = "member1";
+            member1.PlaceholderText = "Enter Member Name";
+            member1.Size = new Size(205, 23);
+            member1.TabIndex = 3;
             // 
-            // rollnum
+            // rollnum1
             // 
-            rollnum.Location = new Point(650, 208);
-            rollnum.Name = "rollnum";
-            rollnum.PlaceholderText = "Enter Roll Number";
-            rollnum.Size = new Size(190, 23);
-            rollnum.TabIndex = 4;
+            rollnum1.Location = new Point(637, 235);
+            rollnum1.Name = "rollnum1";
+            rollnum1.PlaceholderText = "Enter Roll Number";
+            rollnum1.Size = new Size(205, 23);
+            rollnum1.TabIndex = 4;
             // 
-            // password1
+            // passwd1
             // 
-            password1.Location = new Point(650, 260);
-            password1.Name = "password1";
-            password1.PlaceholderText = "Enter Password";
-            password1.Size = new Size(190, 23);
-            password1.TabIndex = 5;
-            password1.UseSystemPasswordChar = true;
+            passwd1.Location = new Point(637, 288);
+            passwd1.Name = "passwd1";
+            passwd1.PlaceholderText = "Enter Password";
+            passwd1.Size = new Size(205, 23);
+            passwd1.TabIndex = 5;
+            passwd1.UseSystemPasswordChar = true;
             // 
             // button1
             // 
-            button1.BackColor = Color.PaleGreen;
-            button1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            button1.BackColor = Color.Red;
+            button1.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             button1.ForeColor = SystemColors.ButtonFace;
-            button1.Location = new Point(683, 323);
+            button1.Location = new Point(688, 354);
             button1.Name = "button1";
-            button1.Size = new Size(118, 36);
+            button1.Size = new Size(104, 31);
             button1.TabIndex = 6;
             button1.Text = "Register";
             button1.UseVisualStyleBackColor = false;
@@ -112,15 +110,15 @@
             linkLabel1.AutoSize = true;
             linkLabel1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             linkLabel1.LinkColor = Color.Black;
-            linkLabel1.Location = new Point(887, 455);
+            linkLabel1.Location = new Point(864, 467);
             linkLabel1.Name = "linkLabel1";
-            linkLabel1.Size = new Size(133, 21);
+            linkLabel1.Size = new Size(156, 21);
             linkLabel1.TabIndex = 7;
             linkLabel1.TabStop = true;
-            linkLabel1.Text = "Back to Account";
+            linkLabel1.Text = "Back To HomePage";
             linkLabel1.LinkClicked += linkLabel1_LinkClicked;
             // 
-            // RegisterPresident
+            // MemberSignup
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -128,15 +126,14 @@
             ClientSize = new Size(1032, 532);
             Controls.Add(linkLabel1);
             Controls.Add(button1);
-            Controls.Add(password1);
-            Controls.Add(rollnum);
-            Controls.Add(name);
+            Controls.Add(passwd1);
+            Controls.Add(rollnum1);
+            Controls.Add(member1);
             Controls.Add(email1);
             Controls.Add(label1);
             Controls.Add(pictureBox1);
-            Name = "RegisterPresident";
-            Text = "RegisterPresident";
-            Load += RegisterPresident_Load;
+            Name = "MemberSignup";
+            Text = "MemberSignup";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -147,9 +144,9 @@
         private PictureBox pictureBox1;
         private Label label1;
         private TextBox email1;
-        private TextBox name;
-        private TextBox rollnum;
-        private TextBox password1;
+        private TextBox member1;
+        private TextBox rollnum1;
+        private TextBox passwd1;
         private Button button1;
         private LinkLabel linkLabel1;
     }

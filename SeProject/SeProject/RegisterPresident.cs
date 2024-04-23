@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static SeProject.constants;
 
 namespace SeProject
 {
@@ -22,7 +23,7 @@ namespace SeProject
 
         private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            AdminLogin adminLogin = new AdminLogin(nme);
+            AdminHomepage adminLogin = new AdminHomepage(nme);
             adminLogin.Show();
             this.Hide();
         }
@@ -35,7 +36,7 @@ namespace SeProject
             string password = password1.Text; // Assuming you have a TextBox named password1 for password
 
             // connectionString should be your actual connection string
-            string connectionString = @"Server=LAPTOP-K1O0L2VM\SQLEXPRESS;Database=seproject;Integrated Security=True;";
+            //string connectionString = MahadConnectionString;
 
             // Check if any of the inputs are null or empty
             if (string.IsNullOrEmpty(email) || string.IsNullOrEmpty(memberName) ||
@@ -87,5 +88,14 @@ namespace SeProject
             }
         }
 
+        private void RegisterPresident_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
