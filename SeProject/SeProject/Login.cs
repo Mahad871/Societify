@@ -34,6 +34,12 @@ namespace SeProject
             string membername;
 
 
+            if (string.IsNullOrWhiteSpace(userid) || string.IsNullOrWhiteSpace(password) || string.IsNullOrWhiteSpace(selectedRole))
+            {
+                MessageBox.Show("Please fill in all fields.");
+                return;
+            }
+
             try
             {
                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -102,6 +108,7 @@ namespace SeProject
                                 MemberHomePage memberLogin = new MemberHomePage(membername, userid);
                                 memberLogin.Show();
                                 this.Hide();
+
                             }
 
 
@@ -141,6 +148,11 @@ namespace SeProject
             Form1 form1 = new Form1();
             form1.Show();
             this.Hide();
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            password1.UseSystemPasswordChar = !checkBox1.Checked;
         }
     }
 }

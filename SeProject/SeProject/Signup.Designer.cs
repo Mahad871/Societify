@@ -36,6 +36,7 @@
             signupbtn = new Button();
             Email = new TextBox();
             back = new Button();
+            PhoneNum = new TextBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
             // 
@@ -43,9 +44,8 @@
             // 
             pictureBox2.Image = Properties.Resources.societify;
             pictureBox2.Location = new Point(-1, 0);
-            pictureBox2.Margin = new Padding(3, 4, 3, 4);
             pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(471, 709);
+            pictureBox2.Size = new Size(412, 532);
             pictureBox2.SizeMode = PictureBoxSizeMode.StretchImage;
             pictureBox2.TabIndex = 1;
             pictureBox2.TabStop = false;
@@ -54,39 +54,36 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Times New Roman", 20.25F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            label1.Location = new Point(710, 76);
+            label1.Location = new Point(621, 57);
             label1.Name = "label1";
-            label1.Size = new Size(304, 38);
+            label1.Size = new Size(245, 31);
             label1.TabIndex = 2;
             label1.Text = "Admin Registration";
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(710, 187);
-            textBox1.Margin = new Padding(3, 4, 3, 4);
+            textBox1.Location = new Point(621, 140);
             textBox1.Name = "textBox1";
             textBox1.PlaceholderText = "Enter UserID";
-            textBox1.Size = new Size(278, 27);
+            textBox1.Size = new Size(244, 23);
             textBox1.TabIndex = 3;
             textBox1.TextChanged += textBox1_TextChanged;
             // 
             // name
             // 
-            name.Location = new Point(710, 313);
-            name.Margin = new Padding(3, 4, 3, 4);
+            name.Location = new Point(621, 235);
             name.Name = "name";
             name.PlaceholderText = "Enter Admin Name";
-            name.Size = new Size(279, 27);
+            name.Size = new Size(245, 23);
             name.TabIndex = 5;
             name.TextChanged += name_TextChanged;
             // 
             // Password
             // 
-            Password.Location = new Point(710, 380);
-            Password.Margin = new Padding(3, 4, 3, 4);
+            Password.Location = new Point(621, 285);
             Password.Name = "Password";
             Password.PlaceholderText = "Enter Password";
-            Password.Size = new Size(279, 27);
+            Password.Size = new Size(245, 23);
             Password.TabIndex = 6;
             Password.UseSystemPasswordChar = true;
             Password.TextChanged += Password_TextChanged;
@@ -95,10 +92,9 @@
             // 
             signupbtn.BackColor = Color.Firebrick;
             signupbtn.ForeColor = SystemColors.ButtonFace;
-            signupbtn.Location = new Point(785, 472);
-            signupbtn.Margin = new Padding(3, 4, 3, 4);
+            signupbtn.Location = new Point(687, 362);
             signupbtn.Name = "signupbtn";
-            signupbtn.Size = new Size(119, 41);
+            signupbtn.Size = new Size(104, 31);
             signupbtn.TabIndex = 7;
             signupbtn.Text = "Sign Up";
             signupbtn.UseVisualStyleBackColor = false;
@@ -106,31 +102,42 @@
             // 
             // Email
             // 
-            Email.Location = new Point(710, 252);
-            Email.Margin = new Padding(3, 4, 3, 4);
+            Email.Location = new Point(621, 189);
             Email.Name = "Email";
             Email.PlaceholderText = "Enter Your Email";
-            Email.Size = new Size(279, 27);
+            Email.Size = new Size(245, 23);
             Email.TabIndex = 8;
             Email.TextChanged += Email_TextChanged_1;
             // 
             // back
             // 
             back.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            back.Location = new Point(492, 27);
+            back.Location = new Point(430, 20);
+            back.Margin = new Padding(3, 2, 3, 2);
             back.Name = "back";
-            back.Size = new Size(165, 40);
+            back.Size = new Size(144, 30);
             back.TabIndex = 9;
             back.Text = "Back";
             back.UseVisualStyleBackColor = true;
             back.Click += back_Click;
             // 
+            // PhoneNum
+            // 
+            PhoneNum.Location = new Point(621, 322);
+            PhoneNum.Margin = new Padding(3, 2, 3, 2);
+            PhoneNum.Name = "PhoneNum";
+            PhoneNum.PlaceholderText = "Enter Phone # (03XXXXXXXXX)";
+            PhoneNum.Size = new Size(245, 23);
+            PhoneNum.TabIndex = 10;
+            PhoneNum.TextChanged += PhoneNum_TextChanged;
+            // 
             // Signup
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Honeydew;
-            ClientSize = new Size(1179, 709);
+            ClientSize = new Size(1032, 532);
+            Controls.Add(PhoneNum);
             Controls.Add(back);
             Controls.Add(Email);
             Controls.Add(signupbtn);
@@ -139,7 +146,6 @@
             Controls.Add(textBox1);
             Controls.Add(label1);
             Controls.Add(pictureBox2);
-            Margin = new Padding(3, 4, 3, 4);
             Name = "Signup";
             Text = "Signup";
             Load += Signup_Load;
@@ -158,5 +164,6 @@
         private Button signupbtn;
         private TextBox Email;
         private Button back;
+        private TextBox PhoneNum;
     }
 }

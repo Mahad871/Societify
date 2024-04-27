@@ -36,6 +36,7 @@
             password1 = new TextBox();
             button1 = new Button();
             linkLabel1 = new LinkLabel();
+            phonenum = new TextBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -99,7 +100,7 @@
             button1.BackColor = Color.PaleGreen;
             button1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             button1.ForeColor = SystemColors.ButtonFace;
-            button1.Location = new Point(683, 323);
+            button1.Location = new Point(681, 344);
             button1.Name = "button1";
             button1.Size = new Size(118, 36);
             button1.TabIndex = 6;
@@ -120,12 +121,22 @@
             linkLabel1.Text = "Back to Account";
             linkLabel1.LinkClicked += linkLabel1_LinkClicked;
             // 
+            // phonenum
+            // 
+            phonenum.Location = new Point(652, 305);
+            phonenum.Name = "phonenum";
+            phonenum.PlaceholderText = "Enter Phone # (03XXXXXXXXX)";
+            phonenum.Size = new Size(188, 23);
+            phonenum.TabIndex = 8;
+            phonenum.TextChanged += phonenum_TextChanged;
+            // 
             // RegisterPresident
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Honeydew;
             ClientSize = new Size(1032, 532);
+            Controls.Add(phonenum);
             Controls.Add(linkLabel1);
             Controls.Add(button1);
             Controls.Add(password1);
@@ -152,5 +163,6 @@
         private TextBox password1;
         private Button button1;
         private LinkLabel linkLabel1;
+        private TextBox phonenum;
     }
 }

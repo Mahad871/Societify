@@ -36,6 +36,7 @@
             password1 = new TextBox();
             loginbtn = new Button();
             back = new Button();
+            checkBox1 = new CheckBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -127,12 +128,25 @@
             back.UseVisualStyleBackColor = true;
             back.Click += back_Click;
             // 
+            // checkBox1
+            // 
+            checkBox1.AutoSize = true;
+            checkBox1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            checkBox1.Location = new Point(692, 305);
+            checkBox1.Name = "checkBox1";
+            checkBox1.Size = new Size(112, 19);
+            checkBox1.TabIndex = 8;
+            checkBox1.Text = "Show Password";
+            checkBox1.UseVisualStyleBackColor = true;
+            checkBox1.CheckedChanged += checkBox1_CheckedChanged;
+            // 
             // Login
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Honeydew;
             ClientSize = new Size(1032, 532);
+            Controls.Add(checkBox1);
             Controls.Add(back);
             Controls.Add(loginbtn);
             Controls.Add(password1);
@@ -159,5 +173,6 @@
         private TextBox password1;
         private Button loginbtn;
         private Button back;
+        private CheckBox checkBox1;
     }
 }

@@ -36,6 +36,7 @@
             passwd1 = new TextBox();
             button1 = new Button();
             back = new Button();
+            phnum = new TextBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -102,7 +103,7 @@
             button1.BackColor = Color.Red;
             button1.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             button1.ForeColor = SystemColors.ButtonFace;
-            button1.Location = new Point(779, 540);
+            button1.Location = new Point(774, 563);
             button1.Margin = new Padding(3, 4, 3, 4);
             button1.Name = "button1";
             button1.Size = new Size(119, 41);
@@ -122,12 +123,21 @@
             back.UseVisualStyleBackColor = true;
             back.Click += back_Click;
             // 
+            // phnum
+            // 
+            phnum.Location = new Point(722, 514);
+            phnum.Name = "phnum";
+            phnum.PlaceholderText = "Enter Phone # (03XXXXXXXXX)";
+            phnum.Size = new Size(233, 27);
+            phnum.TabIndex = 10;
+            // 
             // MemberSignup
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Honeydew;
             ClientSize = new Size(1179, 709);
+            Controls.Add(phnum);
             Controls.Add(back);
             Controls.Add(button1);
             Controls.Add(passwd1);
@@ -154,5 +164,6 @@
         private TextBox passwd1;
         private Button button1;
         private Button back;
+        private TextBox phnum;
     }
 }

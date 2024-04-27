@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static SeProject.constants;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace SeProject
 {
@@ -52,13 +53,57 @@ namespace SeProject
             string email = Email.Text;
             string memberName = name.Text;
             string password = Password.Text;
-            int newUserId;
+            string phonenum = PhoneNum.Text;
 
+            int newUserId;
             if (string.IsNullOrWhiteSpace(rollno) || string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(memberName) || string.IsNullOrWhiteSpace(password))
             {
                 MessageBox.Show("Please fill in all fields.");
                 return;
             }
+
+
+
+
+            if (!ValidateEmail(email))
+            {
+                MessageBox.Show("Invalid email address.");
+                return;
+            }
+            if (!ValidateRollNumber(rollno))
+            {
+                MessageBox.Show("Invalid Roll Number (must be of the form 21I-XXXX).");
+                return;
+            }
+            if (!ValidatePassword(password))
+            {
+                MessageBox.Show("Invalid Password (must be at least 7 characters long).");
+                return;
+            }
+            if (!ValidatePhoneNo(phonenum))
+            {
+                MessageBox.Show("Invalid Phone Number (must be 11 characters long) and Format (03xxxxxxxxx).");
+                return;
+            }
+
+
+            if (CheckUserExistsEmail(email))
+            {
+                MessageBox.Show("User with this Email already exists.");
+                return;
+            }
+            if (CheckUserExistsRollNo(rollno))
+            {
+                MessageBox.Show("User with this Roll Number already exists.");
+                return;
+            }
+            if (CheckUserExistsPhoneNo(phonenum))
+            {
+                MessageBox.Show("User with this Phone no already exists.");
+                return;
+            }
+
+
 
             try
             {
@@ -67,7 +112,7 @@ namespace SeProject
                     connection.Open();
 
 
-                    string sqlInsertUser = "INSERT INTO Users (Email, MemberName, Password, RollNo) OUTPUT INSERTED.UserID VALUES (@Email, @MemberName, @Password, @RollNo);";
+                    string sqlInsertUser = "INSERT INTO Users (Email, MemberName, Password, RollNo, PhoneNumber) OUTPUT INSERTED.UserID VALUES (@Email, @MemberName, @Password, @RollNo,@PhoneNumber);";
 
                     using (SqlCommand commandInsertUser = new SqlCommand(sqlInsertUser, connection))
                     {
@@ -75,7 +120,7 @@ namespace SeProject
                         commandInsertUser.Parameters.AddWithValue("@MemberName", memberName);
                         commandInsertUser.Parameters.AddWithValue("@Password", password);
                         commandInsertUser.Parameters.AddWithValue("@RollNo", rollno);
-
+                        commandInsertUser.Parameters.AddWithValue("@PhoneNumber", phonenum);
                         newUserId = (int)commandInsertUser.ExecuteScalar();
 
 
@@ -109,6 +154,16 @@ namespace SeProject
             Form1 form1 = new Form1();
             form1.Show();
             this.Hide();
+        }
+
+        private void PhoneNum_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void vScrollBar1_Scroll(object sender, ScrollEventArgs e)
+        {
+
         }
     }
 }

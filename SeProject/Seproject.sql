@@ -126,3 +126,26 @@ BEGIN
     -- Additional logic can be added here to handle presidents with multiple societies
 END;
 
+
+ALTER TABLE Events
+DROP CONSTRAINT FK_Events_SocietyID;
+
+ALTER TABLE Events
+ADD CONSTRAINT FK_Events_SocietyID
+FOREIGN KEY (SocietyID) REFERENCES Societies(SocietyID)
+ON DELETE CASCADE;
+
+ALTER TABLE Tickets
+DROP CONSTRAINT FK_Tickets_EventID;
+
+ALTER TABLE Tickets
+ADD CONSTRAINT FK_Tickets_EventID
+FOREIGN KEY (EventID) REFERENCES Events(EventID)
+ON DELETE CASCADE;
+
+select *from Societies
+select *from Tickets
+select *from Events
+
+delete from Societies
+where SocietyID=11

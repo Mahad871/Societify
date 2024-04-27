@@ -14,6 +14,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 
+
 namespace SeProject
 {
     public partial class MemberSignup : Form
@@ -31,6 +32,7 @@ namespace SeProject
             string email = email1.Text;
             string memberName = member1.Text;
             string password = passwd1.Text;
+            string number = phnum.Text;
             int newUserId;
 
             if (string.IsNullOrWhiteSpace(rollno) || string.IsNullOrWhiteSpace(email) || string.IsNullOrWhiteSpace(memberName) || string.IsNullOrWhiteSpace(password))
@@ -39,6 +41,57 @@ namespace SeProject
                 return;
             }
 
+
+            
+
+            if (!ValidateEmail(email))
+            {
+                bool a=ValidateEmail(email);
+                Console.WriteLine(a);
+                MessageBox.Show("Invalid email address.");
+                return;
+            }
+            if(!ValidateName(memberName))
+            {
+                MessageBox.Show("Invalid Name .");
+                return;
+            }
+            if (!ValidateRollNumber(rollno))
+            {
+                MessageBox.Show("Invalid Roll Number (must be of the form 21I-XXXX).");
+                return;
+            }
+            if (!ValidatePassword(password))
+            {
+                MessageBox.Show("Invalid Password (must be at least 7 characters long).");
+                return;
+            }
+            if (!ValidatePhoneNo(number))
+            {
+                MessageBox.Show("Invalid Phone Number (must be 11 characters long) and Format (03xxxxxxxxx).");
+                return;
+            }
+
+            
+            if (CheckUserExistsEmail(email))
+            {
+                MessageBox.Show("User with this Email already exists.");
+                return;
+            }
+            if (CheckUserExistsRollNo(rollno))
+            {
+                MessageBox.Show("User with this Roll Number already exists.");
+                return;
+            }
+            if (CheckUserExistsPhoneNo(number))
+            {
+                MessageBox.Show("User with this Phone no already exists.");
+                return;
+            }
+
+
+
+
             try
             {
                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -46,7 +99,7 @@ namespace SeProject
                     connection.Open();
 
 
-                    string sqlInsertUser = "INSERT INTO Users (Email, MemberName, Password, RollNo,Role) OUTPUT INSERTED.UserID VALUES (@Email, @MemberName, @Password, @RollNo,@Role);";
+                    string sqlInsertUser = "INSERT INTO Users (Email, MemberName, Password, RollNo,Role,PhoneNumber) OUTPUT INSERTED.UserID VALUES (@Email, @MemberName, @Password, @RollNo,@Role,@PhoneNumber);";
 
                     using (SqlCommand commandInsertUser = new SqlCommand(sqlInsertUser, connection))
                     {
@@ -54,6 +107,7 @@ namespace SeProject
                         commandInsertUser.Parameters.AddWithValue("@MemberName", memberName);
                         commandInsertUser.Parameters.AddWithValue("@Password", password);
                         commandInsertUser.Parameters.AddWithValue("@RollNo", rollno);
+                        commandInsertUser.Parameters.AddWithValue("@PhoneNumber", number);
                         commandInsertUser.Parameters.AddWithValue("@Role", "Member");
 
                         newUserId = (int)commandInsertUser.ExecuteScalar();
